@@ -2,8 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { User, ChevronDown, LogIn, UserPlus } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
+import { User, ChevronDown, LogIn } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface ProfileDropdownProps {

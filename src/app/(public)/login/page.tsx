@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import { AuthForm } from '@/components/auth/AuthForm';
 import { FormField } from '@/components/auth/FormField';
 import { SubmitButton } from '@/components/auth/SubmitButton';
@@ -23,11 +23,11 @@ export default function LoginPage() {
 
     try {
       const response = await authApi.login(data);
-      
+
       if (response.success && response.data) {
         // Store access token
         tokenManager.setAccessToken(response.data.access_token);
-        
+
         // Show success message
         setAlert({
           type: 'success',
@@ -39,16 +39,16 @@ export default function LoginPage() {
           router.push('/account');
         }, 1500);
       }
-    } catch (error: any) {
-      console.error('Login error:', error);
-      
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'An error occurred';
+
       // Handle different error types
-      if (error.message.includes('2FA')) {
+      if (errorMessage.includes('2FA')) {
         setAlert({
           type: 'info',
           message: 'Two-factor authentication is required. Please contact support.',
         });
-      } else if (error.message.includes('rate limit')) {
+      } else if (errorMessage.includes('rate limit')) {
         setAlert({
           type: 'error',
           message: 'Too many login attempts. Please try again later.',
@@ -56,7 +56,7 @@ export default function LoginPage() {
       } else {
         setAlert({
           type: 'error',
-          message: error.message || 'Invalid email or password. Please try again.',
+          message: errorMessage || 'Invalid email or password. Please try again.',
         });
       }
     } finally {
@@ -65,8 +65,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8" 
-         style={{ backgroundColor: 'var(--color-background-primary)' }}>
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+      style={{ backgroundColor: 'var(--color-background-primary)' }}>
       <div className="max-w-md w-full space-y-8">
         {/* Header */}
         <div className="text-center">
@@ -84,8 +84,8 @@ export default function LoginPage() {
         )}
 
         {/* Login Form */}
-        <div className="bg-white rounded-xl shadow-lg p-8" 
-             style={{ backgroundColor: 'var(--color-background-surface)' }}>
+        <div className="bg-white rounded-xl shadow-lg p-8"
+          style={{ backgroundColor: 'var(--color-background-surface)' }}>
           <AuthForm
             schema={loginSchema}
             onSubmit={handleSubmit}
@@ -147,7 +147,7 @@ export default function LoginPage() {
           {/* Sign Up Link */}
           <div className="mt-6 text-center">
             <p className="text-sm text-stone-600">
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <Link
                 href="/register"
                 className="font-medium text-teal-600 hover:text-teal-700"

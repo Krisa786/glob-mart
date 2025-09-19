@@ -26,14 +26,14 @@ export default function ForgotPasswordPage() {
         setIsSubmitted(true);
         setAlert({
           type: 'success',
-          message: 'If an account with this email exists, we\'ve sent you a password reset link. Please check your email and follow the instructions.',
+          message: 'If an account with this email exists, we&apos;ve sent you a password reset link. Please check your email and follow the instructions.',
         });
       }
-    } catch (error: any) {
-      console.error('Forgot password error:', error);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'An error occurred';
       
       // Handle different error types
-      if (error.message.includes('rate limit')) {
+      if (errorMessage.includes('rate limit')) {
         setAlert({
           type: 'error',
           message: 'Too many password reset attempts. Please try again later.',
@@ -43,7 +43,7 @@ export default function ForgotPasswordPage() {
         setIsSubmitted(true);
         setAlert({
           type: 'success',
-          message: 'If an account with this email exists, we\'ve sent you a password reset link. Please check your email and follow the instructions.',
+          message: 'If an account with this email exists, we&apos;ve sent you a password reset link. Please check your email and follow the instructions.',
         });
       }
     } finally {
@@ -65,7 +65,7 @@ export default function ForgotPasswordPage() {
               Check Your Email
             </h1>
             <p className="mt-2 text-sm text-stone-600">
-              We've sent you a password reset link
+              We&apos;ve sent you a password reset link
             </p>
           </div>
 
@@ -92,7 +92,7 @@ export default function ForgotPasswordPage() {
 
               <div className="pt-4 border-t border-stone-200">
                 <p className="text-sm text-stone-500 text-center">
-                  Didn't receive the email? Check your spam folder or{' '}
+                  Didn&apos;t receive the email? Check your spam folder or{' '}
                   <button
                     onClick={() => {
                       setIsSubmitted(false);
@@ -132,7 +132,7 @@ export default function ForgotPasswordPage() {
             Reset Password
           </h1>
           <p className="mt-2 text-sm text-stone-600">
-            Enter your email address and we'll send you a link to reset your password
+            Enter your email address and we&apos;ll send you a link to reset your password
           </p>
         </div>
 

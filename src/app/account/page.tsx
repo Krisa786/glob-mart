@@ -11,7 +11,7 @@ export default function AccountPage() {
   const router = useRouter();
   const [user, setUser] = useState<UserType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [alert, setAlert] = useState<{ type: 'success' | 'error' | 'info'; message: string } | null>(null);
+  const [alert] = useState<{ type: 'success' | 'error' | 'info'; message: string } | null>(null);
 
   useEffect(() => {
     const loadUserProfile = async () => {
@@ -28,7 +28,6 @@ export default function AccountPage() {
           setUser(response.data.user);
         }
       } catch (error) {
-        console.error('Failed to load user profile:', error);
         // Token might be expired, redirect to login
         tokenManager.removeAccessToken();
         router.push('/login');

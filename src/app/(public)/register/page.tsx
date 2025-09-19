@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Eye, EyeOff, User, Mail, Lock, Phone } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import { AuthForm } from '@/components/auth/AuthForm';
 import { FormField } from '@/components/auth/FormField';
 import { SubmitButton } from '@/components/auth/SubmitButton';
@@ -33,11 +33,11 @@ export default function RegisterPage() {
       };
 
       const response = await authApi.register(registrationData);
-      
+
       if (response.success && response.data) {
         // Store access token
         tokenManager.setAccessToken(response.data.access_token);
-        
+
         // Show success message
         setAlert({
           type: 'success',
@@ -49,16 +49,16 @@ export default function RegisterPage() {
           router.push('/account');
         }, 2000);
       }
-    } catch (error: any) {
-      console.error('Registration error:', error);
-      
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'An error occurred';
+
       // Handle different error types
-      if (error.message.includes('email already exists') || error.message.includes('duplicate')) {
+      if (errorMessage.includes('email already exists') || errorMessage.includes('duplicate')) {
         setAlert({
           type: 'error',
           message: 'An account with this email already exists. Please try logging in instead.',
         });
-      } else if (error.message.includes('rate limit')) {
+      } else if (errorMessage.includes('rate limit')) {
         setAlert({
           type: 'error',
           message: 'Too many registration attempts. Please try again later.',
@@ -66,7 +66,7 @@ export default function RegisterPage() {
       } else {
         setAlert({
           type: 'error',
-          message: error.message || 'Registration failed. Please try again.',
+          message: errorMessage || 'Registration failed. Please try again.',
         });
       }
     } finally {
@@ -75,8 +75,8 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8" 
-         style={{ backgroundColor: 'var(--color-background-primary)' }}>
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+      style={{ backgroundColor: 'var(--color-background-primary)' }}>
       <div className="max-w-md w-full space-y-8">
         {/* Header */}
         <div className="text-center">
@@ -94,8 +94,8 @@ export default function RegisterPage() {
         )}
 
         {/* Registration Form */}
-        <div className="bg-white rounded-xl shadow-lg p-8" 
-             style={{ backgroundColor: 'var(--color-background-surface)' }}>
+        <div className="bg-white rounded-xl shadow-lg p-8"
+          style={{ backgroundColor: 'var(--color-background-surface)' }}>
           <AuthForm
             schema={registerSchema}
             onSubmit={handleSubmit}

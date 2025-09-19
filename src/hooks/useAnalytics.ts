@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 interface AnalyticsEvent {
   event: string;
-  properties?: Record<string, any>;
+  properties?: Record<string, unknown>;
 }
 
 interface PageViewEvent {
@@ -19,7 +19,7 @@ export const useAnalytics = () => {
     if (!isEnabled) return;
     
     // Placeholder for analytics tracking
-    console.log('Analytics Event:', event);
+    // console.log('Analytics Event:', event);
     
     // Future implementation could include:
     // - Google Analytics
@@ -31,7 +31,7 @@ export const useAnalytics = () => {
     if (!isEnabled) return;
     
     // Placeholder for page view tracking
-    console.log('Page View:', pageView);
+    // console.log('Page View:', pageView);
   };
 
   return {

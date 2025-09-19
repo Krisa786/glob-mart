@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import { Search } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
-import { ProfileDropdown } from './ProfileDropdown';
 import { cn } from '@/lib/utils';
 
 export interface NavbarProps {
