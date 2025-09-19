@@ -1,140 +1,41 @@
-# Dependencies
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-package-lock.json
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
-# Logs
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
+# testing
+/coverage
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
+# next.js
+/.next/
+/out/
 
-# Coverage directory used by tools like istanbul
-coverage/
-*.lcov
+# production
+/build
 
-# nyc test coverage
-.nyc_output
-
-# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
-.grunt
-
-# Bower dependency directory (https://bower.io/)
-bower_components
-
-# node-waf configuration
-.lock-wscript
-
-# Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
-
-# Dependency directories
-jspm_packages/
-
-# TypeScript cache
-*.tsbuildinfo
-
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
-
-# Microbundle cache
-.rpt2_cache/
-.rts2_cache_cjs/
-.rts2_cache_es/
-.rts2_cache_umd/
-
-# Optional REPL history
-.node_repl_history
-
-# Output of 'npm pack'
-*.tgz
-
-# Yarn Integrity file
-.yarn-integrity
-
-# dotenv environment variables file
-.env
-.env.test
-
-# parcel-bundler cache (https://parceljs.org/)
-.cache
-.parcel-cache
-
-# Next.js build output
-.next
-
-# Nuxt.js build / generate output
-.nuxt
-dist
-
-# Gatsby files
-.cache/
-public
-
-# Storybook build outputs
-.out
-.storybook-out
-
-# Temporary folders
-tmp/
-temp/
-
-# Editor directories and files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS generated files
+# misc
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Database
-*.sqlite
-*.sqlite3
-*.db
-
-# SSL certificates
 *.pem
-*.key
-*.crt
 
-# Build outputs
-build/
-dist/
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
 
-# Test coverage
-coverage/
+# env files (can opt-in for committing if needed)
+.env*
 
-# Backup files
-*.backup
-*.bak
+# vercel
+.vercel
 
-# Local development
-.local/
+# typescript
+*.tsbuildinfo
+next-env.d.ts
