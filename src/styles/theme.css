@@ -110,8 +110,8 @@
   --z-tooltip: 1070;
 }
 
-/* Dark mode support (for future use) */
-@media (prefers-color-scheme: dark) {
+/* Dark mode support disabled - using custom theme colors only */
+/* @media (prefers-color-scheme: dark) {
   :root {
     --color-background-primary: #0c0a09;
     --color-background-secondary: #1c1917;
@@ -120,17 +120,27 @@
     --color-text-secondary: #a8a29e;
     --color-text-muted: #57534e;
   }
-}
+} */
 
 /* Base styles */
 body {
-  background-color: var(--color-background-primary);
-  color: var(--color-text-primary);
+  background-color: var(--color-background-primary) !important;
+  color: var(--color-text-primary) !important;
   font-family:
     system-ui,
     -apple-system,
     sans-serif;
   line-height: var(--line-height-normal);
+}
+
+/* Force custom theme colors and prevent browser dark mode overrides */
+html {
+  color-scheme: light only;
+}
+
+html, body {
+  background-color: var(--color-background-primary) !important;
+  color: var(--color-text-primary) !important;
 }
 
 /* Focus styles for accessibility */
