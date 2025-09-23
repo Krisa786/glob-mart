@@ -33,14 +33,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const buttonClasses = cn(baseStyles, variants[variant], sizes[size], className);
     const buttonStyle = variant === 'primary' ? { backgroundColor: '#165641' } : undefined;
 
-    if (asChild) {
-      // When asChild is true, clone the child element and add our classes
-      const childElement = children as React.ReactElement;
+    if (asChild && React.isValidElement(children)) {
+      // When asChild is true, clone the child element and add our classes.
+      // Only pass safe style/className overrides to avoid prop typing conflicts.
+      type ChildProps = { className?: string; style?: React.CSSProperties };
+      const childElement = children as React.ReactElement<ChildProps>;
       return React.cloneElement(childElement, {
         className: cn(buttonClasses, childElement.props?.className),
         style: { ...buttonStyle, ...childElement.props?.style },
-        ref,
-        ...props,
       });
     }
 
