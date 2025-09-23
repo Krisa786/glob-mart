@@ -149,7 +149,7 @@ export interface MenuItem {
  * @returns Array of menu items for the user dropdown
  */
 export function getUserMenuItems(sessionState: SessionState): MenuItem[] {
-  const { isAuthenticated, user, roles } = sessionState;
+  const { isAuthenticated, roles } = sessionState;
   
   if (!isAuthenticated) {
     return [

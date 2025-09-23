@@ -6,7 +6,7 @@ import { isEmailConfigured } from '@/lib/config/development';
 // Validate email configuration
 const configValidation = validateEmailConfig();
 if (!configValidation.valid) {
-  console.warn('Email configuration issues:', configValidation.errors);
+  // console.warn('Email configuration issues:', configValidation.errors);
 }
 
 // Create transporter
@@ -32,10 +32,10 @@ export async function sendPasswordResetEmail(
       text: `Reset your password by clicking the following link: ${resetUrl}`,
     };
 
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Password reset email sent:', info.messageId);
-  } catch (error) {
-    console.error('Error sending password reset email:', error);
+    const _info = await transporter.sendMail(mailOptions);
+    // console.log('Password reset email sent:', _info.messageId);
+  } catch (_error) {
+    // console.error('Error sending password reset email:', _error);
     throw new Error('Failed to send password reset email');
   }
 }
@@ -44,10 +44,10 @@ export async function sendPasswordResetEmail(
 export async function verifyEmailConfig(): Promise<boolean> {
   try {
     await transporter.verify();
-    console.log('Email configuration verified successfully');
+    // console.log('Email configuration verified successfully');
     return true;
-  } catch (error) {
-    console.error('Email configuration verification failed:', error);
+  } catch (_error) {
+    // console.error('Email configuration verification failed:', _error);
     return false;
   }
 }
