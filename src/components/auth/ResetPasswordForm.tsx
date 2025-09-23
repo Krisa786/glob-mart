@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Eye, EyeOff, Lock, AlertCircle, CheckCircle, ArrowLeft } from 'lucide-react';
+import { CheckCircle, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Alert } from '@/components/ui/Alert';
@@ -58,7 +58,8 @@ export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
         setError(response.message || 'Failed to reset password');
       }
     } catch (error) {
-      console.error('Reset password error:', error);
+      // Log error for debugging
+      // console.error('Reset password error:', error);
       const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.';
       
       // Handle specific token-related errors

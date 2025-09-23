@@ -52,7 +52,8 @@ export async function POST(request: NextRequest) {
         await sendPasswordResetEmail(email, resetToken);
       } else if (isDevelopment()) {
         // In development mode without email config, log the reset link
-        console.log(`🔗 Password reset link for ${email}: ${emailConfig.appUrl}/reset-password/${resetToken}`);
+        // In development mode, log the reset link for testing
+        // console.log(`🔗 Password reset link for ${email}: ${emailConfig.appUrl}/reset-password/${resetToken}`);
       } else {
         // In production without email config, this is an error
         throw new Error('Email configuration is required in production');
@@ -66,14 +67,15 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('Forgot password error:', error);
-    console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
+    // Log error for debugging
+    // console.error('Forgot password error:', error);
+    // console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
 
     if (error instanceof z.ZodError) {
       return NextResponse.json({
         success: false,
         message: 'Invalid email address',
-        errors: error.issues.map((err: any) => ({
+        errors: error.issues.map((err: z.ZodIssue) => ({
           field: err.path.join('.'),
           message: err.message,
         })),
@@ -106,5 +108,7 @@ export async function POST(request: NextRequest) {
 async function checkUserExists(_email: string): Promise<boolean> {
   // TODO: Implement actual user lookup from your database
   // For now, return true to always send emails
+  // Log for debugging
+  // console.log(`Checking if user exists for email: ${_email}`);
   return true;
 }

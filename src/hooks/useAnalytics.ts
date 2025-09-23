@@ -35,9 +35,7 @@ export const useAnalytics = () => {
   };
 
   return {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
     trackEvent: (_event: AnalyticsEvent) => trackEvent(),
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
     trackPageView: (_pageView: PageViewEvent) => trackPageView(),
     isEnabled,
   };

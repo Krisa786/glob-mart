@@ -12,11 +12,11 @@ interface SessionState {
 }
 
 interface SessionContextType extends SessionState {
-  login: (user: User, accessToken: string) => Promise<void>;
+  login: (_user: User, _accessToken: string) => Promise<void>;
   logout: () => Promise<void>;
   refreshSession: () => Promise<void>;
-  hasRole: (role: string) => boolean;
-  hasAnyRole: (roles: string[]) => boolean;
+  hasRole: (_role: string) => boolean;
+  hasAnyRole: (_roles: string[]) => boolean;
 }
 
 const SessionContext = createContext<SessionContextType | undefined>(undefined);
@@ -70,9 +70,10 @@ export function SessionProvider({ children }: SessionProviderProps) {
           roles: [],
         });
       }
-    } catch (error) {
+    } catch (_error) {
       // Error fetching user, clear session
-      console.error('Session initialization error:', error);
+      // Log error for debugging
+      // console.error('Session initialization error:', _error);
       tokenManager.removeAccessToken();
       setSessionState({
         user: null,
@@ -99,9 +100,10 @@ export function SessionProvider({ children }: SessionProviderProps) {
     try {
       // Call logout API to revoke refresh token
       await authApi.logout();
-    } catch (error) {
+    } catch (_error) {
       // Continue with logout even if API call fails
-      console.error('Logout API error:', error);
+      // Log error for debugging
+      // console.error('Logout API error:', _error);
     } finally {
       // Clear local session
       tokenManager.removeAccessToken();
@@ -148,8 +150,9 @@ export function SessionProvider({ children }: SessionProviderProps) {
           roles: [],
         });
       }
-    } catch (error) {
-      console.error('Session refresh error:', error);
+    } catch (_error) {
+      // Log error for debugging
+      // console.error('Session refresh error:', _error);
       tokenManager.removeAccessToken();
       setSessionState({
         user: null,

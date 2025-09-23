@@ -14,7 +14,7 @@ const resetPasswordSchema = z.object({
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { token, password: _password } = resetPasswordSchema.parse(body);
+    const { token, password } = resetPasswordSchema.parse(body);
 
     // Verify the reset token
     const tokenVerification = await verifyResetToken(token);
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     }
 
     // TODO: Update the user's password in your database
-    // await updateUserPassword(tokenVerification.email!, password);
+    await updateUserPassword(tokenVerification.email!, password);
     
     // Consume the reset token to prevent reuse
     await consumeResetToken(token);
@@ -38,13 +38,14 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('Reset password error:', error);
+    // Log error for debugging
+    // console.error('Reset password error:', error);
 
     if (error instanceof z.ZodError) {
       return NextResponse.json({
         success: false,
         message: 'Invalid input data',
-        errors: error.issues.map((err: any) => ({
+        errors: error.issues.map((err: z.ZodIssue) => ({
           field: err.path.join('.'),
           message: err.message,
         })),
@@ -66,6 +67,7 @@ async function updateUserPassword(_email: string, _newPassword: string): Promise
   // 2. Update the user's password in the database
   // 3. Invalidate any existing sessions for security
   
-  // console.log(`Password update requested for ${email}`);
+  // Log for debugging
+  // console.log(`Password update requested for ${_email}`);
   throw new Error('Password update not implemented yet');
 }

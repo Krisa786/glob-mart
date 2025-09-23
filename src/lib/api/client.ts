@@ -69,8 +69,9 @@ export async function apiRequest<T>(
           const retryResponse = await fetch(url, retryOptions);
           return await handleResponse<T>(retryResponse);
         }
-      } catch (refreshError) {
+      } catch (_error) {
         // Refresh failed, clear tokens and redirect to login
+        // console.error('Token refresh failed:', _error);
         tokenManager.removeAccessToken();
         if (typeof window !== 'undefined') {
           window.location.href = '/login';
@@ -79,15 +80,16 @@ export async function apiRequest<T>(
     }
 
     return await handleResponse<T>(response);
-  } catch (error) {
-    // Handle network errors
-    return {
-      success: false,
-      message: 'Network error. Please check your connection and try again.',
-      errors: [],
-      data: undefined,
-    };
-  }
+    } catch (_error) {
+      // Handle network errors
+      // console.error('API request failed:', _error);
+      return {
+        success: false,
+        message: 'Network error. Please check your connection and try again.',
+        errors: [],
+        data: undefined,
+      };
+    }
 }
 
 // Helper function to handle API responses

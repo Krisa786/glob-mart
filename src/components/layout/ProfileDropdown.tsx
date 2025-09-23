@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useSession } from '@/contexts/SessionContext';
-import { getUserMenuItems, type MenuItem } from '@/lib/authz';
+import { getUserMenuItems } from '@/lib/authz';
 
 interface ProfileDropdownProps {
   className?: string;

@@ -31,13 +31,14 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('Verify reset token error:', error);
+    // Log error for debugging
+    // console.error('Verify reset token error:', error);
 
     if (error instanceof z.ZodError) {
       return NextResponse.json({
         success: false,
         message: 'Invalid token format',
-        errors: error.issues.map((err: any) => ({
+        errors: error.issues.map((err: z.ZodIssue) => ({
           field: err.path.join('.'),
           message: err.message,
         })),

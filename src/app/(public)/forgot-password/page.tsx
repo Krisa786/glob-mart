@@ -171,7 +171,7 @@ export default function ForgotPasswordPage() {
                   </h3>
                   <div className="mt-2 text-sm text-blue-700">
                     <p className="mb-2">
-                      If you don't receive the email, you can use this direct link:
+                      If you don&apos;t receive the email, you can use this direct link:
                     </p>
                     <div className="bg-white rounded border p-2 break-all">
                       <code className="text-xs text-blue-600">{resetLink}</code>
