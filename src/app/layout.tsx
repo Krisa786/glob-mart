@@ -1,26 +1,30 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import './globals.css';
+import { Navbar } from '@/components/layout/Navbar';
+import { Footer } from '@/components/layout/Footer';
+import { SessionProvider } from '@/contexts/SessionContext';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "Global International - Elevate Hospitality Through Care & Consistency",
-  description: "Premium hospitality products and services for the global hospitality industry. Eco-friendly, sustainable, and safety-assured solutions.",
-  keywords: "hospitality, amenities, linen, safety, washroom, sustainability, eco-friendly",
-  authors: [{ name: "Global International" }],
-  viewport: "width=device-width, initial-scale=1",
-  robots: "index, follow",
+  title:
+    'Global International - Elevate Hospitality Through Care & Consistency',
+  description:
+    'Premium hospitality products and services for the global hospitality industry. Eco-friendly, sustainable, and safety-assured solutions.',
+  keywords:
+    'hospitality, amenities, linen, safety, washroom, sustainability, eco-friendly',
+  authors: [{ name: 'Global International' }],
+  viewport: 'width=device-width, initial-scale=1',
+  robots: 'index, follow',
 };
 
 export default function RootLayout({
@@ -38,15 +42,18 @@ export default function RootLayout({
         >
           Skip to main content
         </a> */}
-        
-        {/* App Shell Structure */}
-        <div className="min-h-screen flex flex-col">
-          <Navbar />
-          <main id="main-content" className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </div>
+
+        {/* Session Provider for authentication state */}
+        <SessionProvider>
+          {/* App Shell Structure */}
+          <div className="min-h-screen flex flex-col">
+            <Navbar />
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </SessionProvider>
       </body>
     </html>
   );

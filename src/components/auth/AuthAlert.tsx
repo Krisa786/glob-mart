@@ -41,7 +41,9 @@ export function AuthAlert({ type, message, className }: AuthAlertProps) {
       )}
       role="alert"
     >
-      <Icon className={cn('h-5 w-5 flex-shrink-0 mt-0.5', variant.iconStyles)} />
+      <Icon
+        className={cn('h-5 w-5 flex-shrink-0 mt-0.5', variant.iconStyles)}
+      />
       <p className="text-sm font-medium">{message}</p>
     </div>
   );

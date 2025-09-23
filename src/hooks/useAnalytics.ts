@@ -15,29 +15,31 @@ interface PageViewEvent {
 export const useAnalytics = () => {
   const isEnabled = process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === 'true';
 
-  const trackEvent = (event: AnalyticsEvent) => {
+  const trackEvent = () => {
     if (!isEnabled) return;
-    
+
     // Placeholder for analytics tracking
     // console.log('Analytics Event:', event);
-    
+
     // Future implementation could include:
     // - Google Analytics
     // - Mixpanel
     // - Custom analytics service
   };
 
-  const trackPageView = (pageView: PageViewEvent) => {
+  const trackPageView = () => {
     if (!isEnabled) return;
-    
+
     // Placeholder for page view tracking
     // console.log('Page View:', pageView);
   };
 
   return {
-    trackEvent,
-    trackPageView,
-    isEnabled
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+    trackEvent: (_event: AnalyticsEvent) => trackEvent(),
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+    trackPageView: (_pageView: PageViewEvent) => trackPageView(),
+    isEnabled,
   };
 };
 
@@ -49,7 +51,7 @@ export const usePageView = (page: string, title?: string) => {
     trackPageView({
       page,
       title: title || document.title,
-      url: window.location.href
+      url: window.location.href,
     });
   }, [page, title, trackPageView]);
 };

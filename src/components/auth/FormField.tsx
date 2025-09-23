@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 
 interface FormFieldProps<
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > {
   form: UseFormReturn<TFieldValues>;
   name: TName;
@@ -21,7 +21,7 @@ interface FormFieldProps<
 
 export function FormField<
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({
   form,
   name,
@@ -53,11 +53,6 @@ export function FormField<
         aria-invalid={error ? 'true' : 'false'}
         aria-describedby={error ? `${name}-error` : undefined}
       />
-      {error && (
-        <p id={`${name}-error`} className="text-sm text-red-600" role="alert">
-          {errorMessage}
-        </p>
-      )}
     </div>
   );
 }
