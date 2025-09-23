@@ -14,7 +14,10 @@ const passwordSchema = z
   .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
   .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
   .regex(/[0-9]/, 'Password must contain at least one number')
-  .regex(/[^A-Za-z0-9]/, 'Password must contain at least one special character');
+  .regex(
+    /[^A-Za-z0-9]/,
+    'Password must contain at least one special character'
+  );
 
 // Name validation
 const nameSchema = z
@@ -39,6 +42,11 @@ export const loginSchema = z.object({
   password: z.string().min(1, 'Password is required'),
 });
 
+// Role validation
+const roleSchema = z
+  .enum(['CUSTOMER', 'ADMIN', 'SALES_MANAGER', 'WAREHOUSE', 'FINANCE', 'SUPPORT'])
+  .default('CUSTOMER');
+
 // Registration form schema
 export const registerSchema = z
   .object({
@@ -48,6 +56,7 @@ export const registerSchema = z
     confirmPassword: z.string().min(1, 'Please confirm your password'),
     phone_country_code: z.string().optional(),
     phone: phoneSchema,
+    role: roleSchema,
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'Passwords do not match',
@@ -60,14 +69,16 @@ export const forgotPasswordSchema = z.object({
 });
 
 // Reset password form schema
-export const resetPasswordSchema = z.object({
-  token: z.string().min(1, 'Reset token is required'),
-  password: passwordSchema,
-  confirmPassword: z.string().min(1, 'Please confirm your password'),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: 'Passwords do not match',
-  path: ['confirmPassword'],
-});
+export const resetPasswordSchema = z
+  .object({
+    token: z.string().min(1, 'Reset token is required'),
+    password: passwordSchema,
+    confirmPassword: z.string().min(1, 'Please confirm your password'),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword'],
+  });
 
 // Type exports
 export type LoginFormData = z.infer<typeof loginSchema>;

@@ -28,8 +28,8 @@
   --color-secondary-950: #0c0a09;
 
   /* Background Colors */
-  --color-background-primary: #F9F7F3;
-  --color-background-secondary: #F3F4EC;
+  --color-background-primary: #f9f7f3;
+  --color-background-secondary: #f3f4ec;
   --color-background-surface: #ffffff;
   --color-background-overlay: rgba(0, 0, 0, 0.2);
 
@@ -38,7 +38,7 @@
   --color-text-secondary: #57534e;
   --color-text-muted: #a8a29e;
   --color-text-inverse: #ffffff;
-  --color-text-tertiary: #074D36;
+  --color-text-tertiary: #074d36;
 
   /* Border Colors */
   --color-border-primary: #d6d3d1;
@@ -90,8 +90,10 @@
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl:
+    0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 
   /* Transitions */
   --transition-fast: 150ms ease-in-out;
@@ -124,7 +126,10 @@
 body {
   background-color: var(--color-background-primary);
   color: var(--color-text-primary);
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
   line-height: var(--line-height-normal);
 }
 

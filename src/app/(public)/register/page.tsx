@@ -9,14 +9,19 @@ import { FormField } from '@/components/auth/FormField';
 import { SubmitButton } from '@/components/auth/SubmitButton';
 import { AuthAlert } from '@/components/auth/AuthAlert';
 import { registerSchema, type RegisterFormData } from '@/lib/validations/auth';
-import { authApi, tokenManager } from '@/lib/api/auth';
+import { authApi } from '@/lib/api/auth';
+import { useSession } from '@/contexts/SessionContext';
 
 export default function RegisterPage() {
   const router = useRouter();
+  const { login } = useSession();
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [alert, setAlert] = useState<{ type: 'success' | 'error' | 'info'; message: string } | null>(null);
+  const [alert, setAlert] = useState<{
+    type: 'success' | 'error' | 'info';
+    message: string;
+  } | null>(null);
 
   const handleSubmit = async (data: RegisterFormData) => {
     setIsLoading(true);
@@ -30,53 +35,79 @@ export default function RegisterPage() {
         full_name: data.full_name,
         phone_country_code: data.phone_country_code || undefined,
         phone: data.phone || undefined,
+        role: data.role || 'CUSTOMER',
       };
 
       const response = await authApi.register(registrationData);
 
       if (response.success && response.data) {
-        // Store access token
-        tokenManager.setAccessToken(response.data.access_token);
+        // Update authentication state
+        await login(response.data.user, response.data.access_token);
 
         // Show success message
+        const roleName = response.data.user.roles?.[0] || 'Customer';
         setAlert({
           type: 'success',
-          message: 'Account created successfully! Redirecting to your account...',
+          message:
+            `${roleName} account created successfully! Redirecting to your account...`,
         });
 
         // Redirect to account page
         setTimeout(() => {
           router.push('/account');
         }, 2000);
-      }
-    } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : 'An error occurred';
-
-      // Handle different error types
-      if (errorMessage.includes('email already exists') || errorMessage.includes('duplicate')) {
-        setAlert({
-          type: 'error',
-          message: 'An account with this email already exists. Please try logging in instead.',
-        });
-      } else if (errorMessage.includes('rate limit')) {
-        setAlert({
-          type: 'error',
-          message: 'Too many registration attempts. Please try again later.',
-        });
       } else {
-        setAlert({
-          type: 'error',
-          message: errorMessage || 'Registration failed. Please try again.',
-        });
+        // Handle API error response
+        const errorMessage =
+          response.message || 'Registration failed. Please try again.';
+
+        if (
+          errorMessage.toLowerCase().includes('email already exists') ||
+          errorMessage.toLowerCase().includes('duplicate') ||
+          errorMessage
+            .toLowerCase()
+            .includes('user with this email already exists')
+        ) {
+          setAlert({
+            type: 'error',
+            message:
+              'An account with this email already exists. Please try logging in instead.',
+          });
+
+          // Auto-redirect to login page after 3 seconds
+          setTimeout(() => {
+            router.push('/login');
+          }, 3000);
+        } else if (errorMessage.toLowerCase().includes('rate limit')) {
+          setAlert({
+            type: 'error',
+            message: 'Too many registration attempts. Please try again later.',
+          });
+        } else {
+          setAlert({
+            type: 'error',
+            message: errorMessage,
+          });
+        }
       }
+    } catch {
+      // console.error('Registration error:', error);
+
+      // Handle unexpected errors
+      setAlert({
+        type: 'error',
+        message: 'An unexpected error occurred. Please try again.',
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
-      style={{ backgroundColor: 'var(--color-background-primary)' }}>
+    <div
+      className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+      style={{ backgroundColor: 'var(--color-background-primary)' }}
+    >
       <div className="max-w-md w-full space-y-8">
         {/* Header */}
         <div className="text-center">
@@ -89,17 +120,14 @@ export default function RegisterPage() {
         </div>
 
         {/* Alert */}
-        {alert && (
-          <AuthAlert type={alert.type} message={alert.message} />
-        )}
+        {alert && <AuthAlert type={alert.type} message={alert.message} />}
 
         {/* Registration Form */}
-        <div className="bg-white rounded-xl shadow-lg p-8"
-          style={{ backgroundColor: 'var(--color-background-surface)' }}>
-          <AuthForm
-            schema={registerSchema}
-            onSubmit={handleSubmit}
-          >
+        <div
+          className="bg-white rounded-xl shadow-lg p-8"
+          style={{ backgroundColor: 'var(--color-background-surface)' }}
+        >
+          <AuthForm schema={registerSchema} onSubmit={handleSubmit}>
             {(form) => (
               <>
                 <div className="space-y-6">
@@ -134,7 +162,9 @@ export default function RegisterPage() {
                       type="button"
                       className="absolute right-3 top-9 text-stone-400 hover:text-stone-600"
                       onClick={() => setShowPassword(!showPassword)}
-                      aria-label={showPassword ? 'Hide password' : 'Show password'}
+                      aria-label={
+                        showPassword ? 'Hide password' : 'Show password'
+                      }
                     >
                       {showPassword ? (
                         <EyeOff className="h-5 w-5" />
@@ -156,8 +186,12 @@ export default function RegisterPage() {
                     <button
                       type="button"
                       className="absolute right-3 top-9 text-stone-400 hover:text-stone-600"
-                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
+                      aria-label={
+                        showConfirmPassword ? 'Hide password' : 'Show password'
+                      }
                     >
                       {showConfirmPassword ? (
                         <EyeOff className="h-5 w-5" />
@@ -186,11 +220,41 @@ export default function RegisterPage() {
                       autoComplete="tel"
                     />
                   </div>
+
+                  {/* Role Selection */}
+                  <div>
+                    <label htmlFor="role" className="block text-sm font-medium text-stone-700 mb-2">
+                      Account Type
+                    </label>
+                    <select
+                      {...form.register('role')}
+                      id="role"
+                      className="w-full px-3 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                      defaultValue="CUSTOMER"
+                    >
+                      <option value="CUSTOMER">Customer - Browse and purchase products</option>
+                      <option value="ADMIN">Administrator - Full system access</option>
+                      <option value="SALES_MANAGER">Sales Manager - Manage quotes and customers</option>
+                      <option value="WAREHOUSE">Warehouse Staff - Manage inventory and orders</option>
+                      <option value="FINANCE">Finance Team - Handle payments and reports</option>
+                      <option value="SUPPORT">Support Team - Customer assistance</option>
+                    </select>
+                    {form.formState.errors.role && (
+                      <p className="mt-1 text-sm text-red-600">
+                        {form.formState.errors.role.message}
+                      </p>
+                    )}
+                    <p className="mt-1 text-xs text-stone-500">
+                      Select the account type that best describes your role. Most users should select &quot;Customer&quot;.
+                    </p>
+                  </div>
                 </div>
 
                 {/* Password Requirements */}
                 <div className="mt-4 p-4 bg-stone-50 rounded-lg">
-                  <p className="text-sm font-medium text-stone-700 mb-2">Password Requirements:</p>
+                  <p className="text-sm font-medium text-stone-700 mb-2">
+                    Password Requirements:
+                  </p>
                   <ul className="text-xs text-stone-600 space-y-1">
                     <li>• At least 8 characters long</li>
                     <li>• Contains uppercase and lowercase letters</li>
@@ -211,7 +275,7 @@ export default function RegisterPage() {
           {/* Sign In Link */}
           <div className="mt-6 text-center">
             <p className="text-sm text-stone-600">
-              Already have an account?{' '}
+              Already have an account?
               <Link
                 href="/login"
                 className="font-medium text-teal-600 hover:text-teal-700"

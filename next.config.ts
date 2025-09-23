@@ -31,12 +31,12 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  
+
   // Performance optimizations
   experimental: {
     optimizePackageImports: ['lucide-react'],
   },
-  
+
   // Image optimization
   images: {
     formats: ['image/webp', 'image/avif'],

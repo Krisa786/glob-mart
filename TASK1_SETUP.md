@@ -129,6 +129,7 @@ src/
 ## 🎯 Next Steps
 
 This setup provides a solid foundation for:
+
 - Authentication screens (Task 2)
 - Role-aware navigation
 - Form implementations
