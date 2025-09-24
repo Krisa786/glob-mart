@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Droplets, Shield, Toilet, Leaf, Gem, ShieldCheck } from 'lucide-react';
 import { usePageView } from '@/hooks/useAnalytics';
 import { Button } from '@/components/ui/Button';
@@ -46,8 +47,10 @@ export default function Home() {
               variant="secondary" 
               size="lg"
               className="bg-[var(--color-text-tertiary)] hover:bg-[var(--color-text-tertiary)]/90 text-white px-8 py-3 rounded-full"
+              asChild
+              href="/categories"
             >
-              Browse Products
+              Browse Categories
             </Button>
           </div>
         </div>

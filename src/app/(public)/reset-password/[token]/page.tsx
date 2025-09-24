@@ -2,9 +2,9 @@ import { Metadata } from 'next';
 import ResetPasswordForm from '@/components/auth/ResetPasswordForm';
 
 interface ResetPasswordPageProps {
-  params: {
+  params: Promise<{
     token: string;
-  };
+  }>;
 }
 
 export const metadata: Metadata = {
@@ -13,8 +13,9 @@ export const metadata: Metadata = {
   robots: 'noindex, nofollow', // Password reset pages should not be indexed
 };
 
-export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
-  const { token } = params;
+export default async function ResetPasswordPage({ params }: ResetPasswordPageProps) {
+  const resolvedParams = await params;
+  const { token } = resolvedParams;
 
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">

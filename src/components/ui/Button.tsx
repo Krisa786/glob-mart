@@ -1,53 +1,51 @@
 import React from 'react';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
   size?: 'sm' | 'md' | 'lg';
-  children: React.ReactNode;
   asChild?: boolean;
+  children: React.ReactNode;
+  href?: string;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    { className, variant = 'primary', size = 'md', children, asChild = false, ...props },
-    ref
-  ) => {
-    const baseStyles =
-      'inline-flex items-center justify-center font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 disabled:pointer-events-none disabled:opacity-50';
- 
-    const variants = {
-      primary: 'text-white hover:bg-teal-900',
-      secondary: 'bg-stone-200 text-stone-900 hover:bg-stone-300',
-      outline: 'border border-stone-300 bg-transparent hover:bg-stone-50',
-      ghost: 'hover:bg-stone-100 hover:text-stone-900',
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant = 'primary', size = 'md', asChild = false, children, href, ...props }, ref) => {
+    const baseClasses = 'inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
+    
+    const variantClasses = {
+      primary: 'bg-[var(--color-primary-600)] text-white hover:bg-[var(--color-primary-700)] active:bg-[var(--color-primary-800)]',
+      secondary: 'bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] border border-[var(--color-border-primary)] hover:bg-[var(--color-background-tertiary)]',
+      outline: 'border border-[var(--color-border-primary)] bg-transparent hover:bg-[var(--color-background-secondary)] text-[var(--color-text-primary)]',
+      ghost: 'hover:bg-[var(--color-background-secondary)] text-[var(--color-text-primary)]',
+      destructive: 'bg-red-600 text-white hover:bg-red-700 active:bg-red-800',
+    };
+    
+    const sizeClasses = {
+      sm: 'h-8 px-3 text-sm rounded-md',
+      md: 'h-10 px-4 text-sm rounded-md',
+      lg: 'h-12 px-6 text-base rounded-lg',
     };
 
-    const sizes = {
-      sm: 'h-8 px-3 text-sm rounded-full',
-      md: 'h-10 px-4 py-2 rounded-full',
-      lg: 'h-12 px-8 text-lg rounded-full',
-    };
+    const classes = cn(
+      baseClasses,
+      variantClasses[variant],
+      sizeClasses[size],
+      className
+    );
 
-    const buttonClasses = cn(baseStyles, variants[variant], sizes[size], className);
-    const buttonStyle = variant === 'primary' ? { backgroundColor: '#165641' } : undefined;
-
-    if (asChild && React.isValidElement(children)) {
-      // When asChild is true, clone the child element and add our classes.
-      // Only pass safe style/className overrides to avoid prop typing conflicts.
-      type ChildProps = { className?: string; style?: React.CSSProperties };
-      const childElement = children as React.ReactElement<ChildProps>;
-      return React.cloneElement(childElement, {
-        className: cn(buttonClasses, childElement.props?.className),
-        style: { ...buttonStyle, ...childElement.props?.style },
-      });
+    if (asChild && href) {
+      return (
+        <Link ref={ref as any} href={href} className={classes} {...(props as any)}>
+          {children}
+        </Link>
+      );
     }
 
     return (
       <button
-        className={buttonClasses}
-        style={buttonStyle}
+        className={classes}
         ref={ref}
         {...props}
       >
@@ -58,5 +56,3 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = 'Button';
-
-export { Button };

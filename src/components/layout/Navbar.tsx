@@ -89,8 +89,9 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
                 size="md"
                 className="rounded-full hidden sm:block"
                 asChild
+                href="/quote"
               >
-                <Link href="/quote">QUOTE</Link>
+                QUOTE
               </Button>
             ) : (
               <Button
@@ -98,8 +99,9 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
                 size="md"
                 className="rounded-full hidden sm:block"
                 asChild
+                href="/login"
               >
-                <Link href="/login">GET QUOTE</Link>
+                GET QUOTE
               </Button>
             )}
           </div>
