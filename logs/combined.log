@@ -5608,3 +5608,102 @@
 {"environment":"development","level":"info","message":"GlobeMart Backend API listening at http://localhost:3001","service":"globe-mart-api","timestamp":"2025-09-24 17:48:50.416","version":"1.0.0"}
 {"environment":"development","level":"info","message":"Environment: development","service":"globe-mart-api","timestamp":"2025-09-24 17:48:50.417","version":"1.0.0"}
 {"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 17:48:52.136","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Database connection established successfully","service":"globe-mart-api","timestamp":"2025-09-24 17:53:39.492","version":"1.0.0"}
+{"environment":"development","level":"info","message":"GlobeMart Backend API listening at http://localhost:3001","service":"globe-mart-api","timestamp":"2025-09-24 17:53:39.499","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Environment: development","service":"globe-mart-api","timestamp":"2025-09-24 17:53:39.499","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 17:53:41.184","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Database connection established successfully","service":"globe-mart-api","timestamp":"2025-09-24 17:53:52.150","version":"1.0.0"}
+{"environment":"development","level":"info","message":"GlobeMart Backend API listening at http://localhost:3001","service":"globe-mart-api","timestamp":"2025-09-24 17:53:52.158","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Environment: development","service":"globe-mart-api","timestamp":"2025-09-24 17:53:52.158","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 17:53:54.502","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Database connection established successfully","service":"globe-mart-api","timestamp":"2025-09-24 17:54:11.735","version":"1.0.0"}
+{"environment":"development","level":"info","message":"GlobeMart Backend API listening at http://localhost:3001","service":"globe-mart-api","timestamp":"2025-09-24 17:54:11.742","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Environment: development","service":"globe-mart-api","timestamp":"2025-09-24 17:54:11.742","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 17:54:13.454","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Database connection established successfully","service":"globe-mart-api","timestamp":"2025-09-24 17:54:28.427","version":"1.0.0"}
+{"environment":"development","level":"info","message":"GlobeMart Backend API listening at http://localhost:3001","service":"globe-mart-api","timestamp":"2025-09-24 17:54:28.432","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Environment: development","service":"globe-mart-api","timestamp":"2025-09-24 17:54:28.433","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 17:54:30.054","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Database connection established successfully","service":"globe-mart-api","timestamp":"2025-09-24 17:55:37.797","version":"1.0.0"}
+{"environment":"development","level":"info","message":"GlobeMart Backend API listening at http://localhost:3001","service":"globe-mart-api","timestamp":"2025-09-24 17:55:37.803","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Environment: development","service":"globe-mart-api","timestamp":"2025-09-24 17:55:37.804","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 17:55:39.456","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Database connection established successfully","service":"globe-mart-api","timestamp":"2025-09-24 17:56:51.258","version":"1.0.0"}
+{"environment":"development","level":"info","message":"GlobeMart Backend API listening at http://localhost:3001","service":"globe-mart-api","timestamp":"2025-09-24 17:56:51.265","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Environment: development","service":"globe-mart-api","timestamp":"2025-09-24 17:56:51.265","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 17:56:52.911","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Database connection established successfully","service":"globe-mart-api","timestamp":"2025-09-24 17:58:25.970","version":"1.0.0"}
+{"environment":"development","level":"info","message":"GlobeMart Backend API listening at http://localhost:3001","service":"globe-mart-api","timestamp":"2025-09-24 17:58:25.979","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Environment: development","service":"globe-mart-api","timestamp":"2025-09-24 17:58:25.980","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 17:58:27.708","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Database connection established successfully","service":"globe-mart-api","timestamp":"2025-09-24 17:59:11.910","version":"1.0.0"}
+{"environment":"development","level":"info","message":"GlobeMart Backend API listening at http://localhost:3001","service":"globe-mart-api","timestamp":"2025-09-24 17:59:11.918","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Environment: development","service":"globe-mart-api","timestamp":"2025-09-24 17:59:11.918","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 17:59:13.650","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Database connection established successfully","service":"globe-mart-api","timestamp":"2025-09-24 17:59:41.371","version":"1.0.0"}
+{"environment":"development","level":"info","message":"GlobeMart Backend API listening at http://localhost:3001","service":"globe-mart-api","timestamp":"2025-09-24 17:59:41.377","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Environment: development","service":"globe-mart-api","timestamp":"2025-09-24 17:59:41.378","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 17:59:43.038","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Database connection established successfully","service":"globe-mart-api","timestamp":"2025-09-24 17:59:52.249","version":"1.0.0"}
+{"environment":"development","level":"info","message":"GlobeMart Backend API listening at http://localhost:3001","service":"globe-mart-api","timestamp":"2025-09-24 17:59:52.255","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Environment: development","service":"globe-mart-api","timestamp":"2025-09-24 17:59:52.255","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 17:59:53.931","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Database connection established successfully","service":"globe-mart-api","timestamp":"2025-09-24 18:00:13.732","version":"1.0.0"}
+{"environment":"development","level":"info","message":"GlobeMart Backend API listening at http://localhost:3001","service":"globe-mart-api","timestamp":"2025-09-24 18:00:13.757","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Environment: development","service":"globe-mart-api","timestamp":"2025-09-24 18:00:13.760","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 18:00:15.408","version":"1.0.0"}
+{"environment":"development","error":"this.queue.process is not a function","level":"error","message":"Failed to initialize checkout cleanup service:","service":"globe-mart-api","timestamp":"2025-09-24 18:03:18.746","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Database connection established successfully","service":"globe-mart-api","timestamp":"2025-09-24 18:03:18.797","version":"1.0.0"}
+{"environment":"development","level":"info","message":"GlobeMart Backend API listening at http://localhost:3001","service":"globe-mart-api","timestamp":"2025-09-24 18:03:18.800","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Environment: development","service":"globe-mart-api","timestamp":"2025-09-24 18:03:18.800","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 18:03:20.482","version":"1.0.0"}
+{"environment":"development","error":"this.queue.process is not a function","level":"error","message":"Failed to initialize checkout cleanup service:","service":"globe-mart-api","timestamp":"2025-09-24 18:03:23.317","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Database connection established successfully","service":"globe-mart-api","timestamp":"2025-09-24 18:03:23.376","version":"1.0.0"}
+{"environment":"development","level":"info","message":"GlobeMart Backend API listening at http://localhost:3001","service":"globe-mart-api","timestamp":"2025-09-24 18:03:23.379","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Environment: development","service":"globe-mart-api","timestamp":"2025-09-24 18:03:23.379","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 18:03:25.018","version":"1.0.0"}
+{"environment":"development","level":"info","message":"SIGINT received, shutting down gracefully","service":"globe-mart-api","timestamp":"2025-09-24 18:03:45.646","version":"1.0.0"}
+{"environment":"development","error":"this.queue.process is not a function","level":"error","message":"Failed to initialize checkout cleanup service:","service":"globe-mart-api","timestamp":"2025-09-24 18:03:49.454","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 18:03:51.154","version":"1.0.0"}
+{"environment":"development","error":"this.queue.process is not a function","level":"error","message":"Failed to initialize checkout cleanup service:","service":"globe-mart-api","timestamp":"2025-09-24 18:04:09.801","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 18:04:11.531","version":"1.0.0"}
+{"environment":"development","error":"this.queue.process is not a function","level":"warn","message":"Failed to initialize checkout cleanup service (Redis not available):","service":"globe-mart-api","timestamp":"2025-09-24 18:04:51.065","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Checkout cleanup service initialized","service":"globe-mart-api","timestamp":"2025-09-24 18:04:51.069","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 18:04:52.773","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Scheduled checkout cleanup job to run every 5 minutes","service":"globe-mart-api","timestamp":"2025-09-24 18:05:03.514","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Checkout cleanup service initialized successfully","service":"globe-mart-api","timestamp":"2025-09-24 18:05:03.517","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Checkout cleanup service initialized","service":"globe-mart-api","timestamp":"2025-09-24 18:05:03.517","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Scheduled checkout cleanup job to run every 5 minutes","service":"globe-mart-api","timestamp":"2025-09-24 18:05:11.500","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Scheduled checkout cleanup job to run every 5 minutes","service":"globe-mart-api","timestamp":"2025-09-24 18:05:23.850","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Scheduled checkout cleanup job to run every 5 minutes","service":"globe-mart-api","timestamp":"2025-09-24 18:05:32.319","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Checkout cleanup service initialized successfully","service":"globe-mart-api","timestamp":"2025-09-24 18:05:32.322","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Checkout cleanup service initialized","service":"globe-mart-api","timestamp":"2025-09-24 18:05:32.323","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Scheduled checkout cleanup job to run every 5 minutes","service":"globe-mart-api","timestamp":"2025-09-24 18:05:44.348","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Scheduled checkout cleanup job to run every 5 minutes","service":"globe-mart-api","timestamp":"2025-09-24 18:05:52.677","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Scheduled checkout cleanup job to run every 5 minutes","service":"globe-mart-api","timestamp":"2025-09-24 18:06:11.438","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Scheduled checkout cleanup job to run every 5 minutes","service":"globe-mart-api","timestamp":"2025-09-24 18:06:15.367","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Scheduled checkout cleanup job to run every 5 minutes","service":"globe-mart-api","timestamp":"2025-09-24 18:06:26.697","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Scheduled checkout cleanup job to run every 5 minutes","service":"globe-mart-api","timestamp":"2025-09-24 18:06:33.910","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Scheduled checkout cleanup job to run every 5 minutes","service":"globe-mart-api","timestamp":"2025-09-24 18:06:43.022","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Scheduled checkout cleanup job to run every 5 minutes","service":"globe-mart-api","timestamp":"2025-09-24 18:07:03.445","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Checkout cleanup service initialized successfully","service":"globe-mart-api","timestamp":"2025-09-24 18:07:03.449","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Checkout cleanup service initialized with Redis","service":"globe-mart-api","timestamp":"2025-09-24 18:07:03.449","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Starting fallback checkout cleanup service (Redis not available)","service":"globe-mart-api","timestamp":"2025-09-24 18:07:29.877","version":"1.0.0"}
+{"environment":"development","interval":"300 seconds","level":"info","message":"Checkout cleanup fallback service started","service":"globe-mart-api","timestamp":"2025-09-24 18:07:29.884","version":"1.0.0"}
+{"environment":"development","error":"Reached the max retries per request limit (which is 1). Refer to \"maxRetriesPerRequest\" option for details.","level":"warn","message":"Failed to initialize checkout cleanup service (Redis not available):","service":"globe-mart-api","timestamp":"2025-09-24 18:07:29.963","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 18:07:31.548","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Starting fallback checkout cleanup service","service":"globe-mart-api","timestamp":"2025-09-24 18:07:39.585","version":"1.0.0"}
+{"environment":"development","interval":"300 seconds","level":"info","message":"Checkout cleanup fallback service started","service":"globe-mart-api","timestamp":"2025-09-24 18:07:39.593","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Using fallback cleanup service only (Redis not available)","service":"globe-mart-api","timestamp":"2025-09-24 18:07:39.594","version":"1.0.0"}
+{"environment":"development","error":"Reached the max retries per request limit (which is 1). Refer to \"maxRetriesPerRequest\" option for details.","level":"warn","message":"Failed to initialize checkout cleanup service (Redis not available):","service":"globe-mart-api","timestamp":"2025-09-24 18:07:39.681","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 18:07:41.345","version":"1.0.0"}
+{"environment":"development","level":"warn","message":"Redis not available, checkout cleanup service will not be initialized","service":"globe-mart-api","timestamp":"2025-09-24 18:07:45.547","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Starting fallback checkout cleanup service","service":"globe-mart-api","timestamp":"2025-09-24 18:07:45.551","version":"1.0.0"}
+{"environment":"development","interval":"300 seconds","level":"info","message":"Checkout cleanup fallback service started","service":"globe-mart-api","timestamp":"2025-09-24 18:07:45.553","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Using fallback cleanup service only (Redis not available)","service":"globe-mart-api","timestamp":"2025-09-24 18:07:45.553","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 18:07:47.375","version":"1.0.0"}
+{"environment":"development","level":"warn","message":"Redis not available, checkout cleanup service will not be initialized","service":"globe-mart-api","timestamp":"2025-09-24 18:08:50.909","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Starting fallback checkout cleanup service","service":"globe-mart-api","timestamp":"2025-09-24 18:08:50.913","version":"1.0.0"}
+{"environment":"development","interval":"300 seconds","level":"info","message":"Checkout cleanup fallback service started","service":"globe-mart-api","timestamp":"2025-09-24 18:08:50.913","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Using fallback cleanup service only (Redis not available)","service":"globe-mart-api","timestamp":"2025-09-24 18:08:50.914","version":"1.0.0"}
+{"environment":"development","level":"info","message":"Email transporter is ready to send messages","service":"globe-mart-api","timestamp":"2025-09-24 18:08:52.616","version":"1.0.0"}

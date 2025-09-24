@@ -18,9 +18,12 @@ const categoriesRoutes = require('./routes/categories');
 const productsRoutes = require('./routes/products');
 const searchRoutes = require('./routes/search');
 const cartRoutes = require('./routes/cart');
+const checkoutRoutes = require('./routes/checkout');
 const docsRoutes = require('./routes/docs');
 const openapiRoutes = require('./routes/openapi');
 const db = require('./database/models');
+const { getCheckoutCleanupService } = require('./services/CheckoutCleanupService');
+const { getCheckoutCleanupFallback } = require('./services/CheckoutCleanupFallback');
 
 const app = express();
 
@@ -71,6 +74,7 @@ app.use('/api/categories', rateLimiters.public, categoriesRoutes);
 app.use('/api/products', rateLimiters.public, productsRoutes);
 app.use('/api/search', rateLimiters.search, searchRoutes);
 app.use('/api/cart', rateLimiters.public, cartRoutes);
+app.use('/api/checkout', rateLimiters.public, checkoutRoutes);
 app.use('/api', rateLimiters.general, docsRoutes);
 app.use('/api', rateLimiters.general, openapiRoutes);
 
@@ -99,6 +103,82 @@ app.use((req, res) => {
       requestId: req.requestId
     }
   });
+});
+
+// Initialize cleanup service
+let cleanupService = null;
+let fallbackService = null;
+
+if (process.env.NODE_ENV !== 'test') {
+  try {
+    cleanupService = getCheckoutCleanupService();
+    
+    // Always start fallback service as backup
+    logger.info('Starting fallback checkout cleanup service');
+    fallbackService = getCheckoutCleanupFallback();
+    fallbackService.start();
+    
+    // If Redis-based service is also available, it will work alongside fallback
+    if (cleanupService.isInitialized) {
+      logger.info('Both Redis and fallback cleanup services are running');
+    } else {
+      logger.info('Using fallback cleanup service only (Redis not available)');
+    }
+  } catch (error) {
+    logger.error('Failed to initialize checkout cleanup service:', {
+      error: error.message
+    });
+    
+    // Start fallback service if Redis service fails
+    logger.info('Starting fallback checkout cleanup service');
+    fallbackService = getCheckoutCleanupFallback();
+    fallbackService.start();
+  }
+}
+
+// Graceful shutdown handler
+process.on('SIGTERM', async () => {
+  logger.info('SIGTERM received, shutting down gracefully');
+  
+  if (cleanupService) {
+    try {
+      await cleanupService.close();
+    } catch (error) {
+      logger.error('Error closing cleanup service:', error.message);
+    }
+  }
+  
+  if (fallbackService) {
+    try {
+      fallbackService.stop();
+    } catch (error) {
+      logger.error('Error stopping fallback service:', error.message);
+    }
+  }
+  
+  process.exit(0);
+});
+
+process.on('SIGINT', async () => {
+  logger.info('SIGINT received, shutting down gracefully');
+  
+  if (cleanupService) {
+    try {
+      await cleanupService.close();
+    } catch (error) {
+      logger.error('Error closing cleanup service:', error.message);
+    }
+  }
+  
+  if (fallbackService) {
+    try {
+      fallbackService.stop();
+    } catch (error) {
+      logger.error('Error stopping fallback service:', error.message);
+    }
+  }
+  
+  process.exit(0);
 });
 
 module.exports = app;
