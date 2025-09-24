@@ -17,6 +17,7 @@ const adminSearchRoutes = require('./routes/adminSearch');
 const categoriesRoutes = require('./routes/categories');
 const productsRoutes = require('./routes/products');
 const searchRoutes = require('./routes/search');
+const cartRoutes = require('./routes/cart');
 const docsRoutes = require('./routes/docs');
 const openapiRoutes = require('./routes/openapi');
 const db = require('./database/models');
@@ -69,6 +70,7 @@ app.use('/api/admin/search', rateLimiters.admin, adminSearchRoutes);
 app.use('/api/categories', rateLimiters.public, categoriesRoutes);
 app.use('/api/products', rateLimiters.public, productsRoutes);
 app.use('/api/search', rateLimiters.search, searchRoutes);
+app.use('/api/cart', rateLimiters.public, cartRoutes);
 app.use('/api', rateLimiters.general, docsRoutes);
 app.use('/api', rateLimiters.general, openapiRoutes);
 
