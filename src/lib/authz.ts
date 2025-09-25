@@ -107,6 +107,7 @@ export function getNavigationItems(sessionState: SessionState) {
   
   if (!isAuthenticated) {
     return [
+      { label: 'Categories', href: '/categories', public: true },
       { label: 'Products', href: '/products', public: true },
       { label: 'About', href: '/about', public: true },
       { label: 'Contact', href: '/contact', public: true },
@@ -114,6 +115,7 @@ export function getNavigationItems(sessionState: SessionState) {
   }
 
   const baseItems = [
+    { label: 'Categories', href: '/categories', public: true },
     { label: 'Products', href: '/products', public: true },
     { label: 'About', href: '/about', public: true },
     { label: 'Contact', href: '/contact', public: true },
