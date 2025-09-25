@@ -29,13 +29,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className }) 
       {/* Product Image */}
       <div className="relative aspect-square overflow-hidden bg-[var(--color-background-secondary)]">
         {primaryImage ? (
-          <Image
+          <img
             src={primaryImage}
             alt={product.title}
-            fill
-            className="object-cover group-hover:scale-105 transition-transform duration-200"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            priority={false}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
             onError={(e) => {
               console.warn('Failed to load product image:', primaryImage);
               // Hide the image element on error

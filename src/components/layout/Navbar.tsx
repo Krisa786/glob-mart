@@ -83,26 +83,38 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
             <ProfileDropdown />
 
             {/* Quote Button - Show for authenticated users or as CTA for guests */}
+            
             {session.isAuthenticated ? (
+             
               <Button
                 variant="primary"
                 size="md"
-                className="rounded-full hidden sm:block"
+                className="rounded-full hidden sm:block "
                 asChild
                 href="/quote"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
               >
                 QUOTE
               </Button>
-            ) : (
+            ) : (            
+              
               <Button
                 variant="primary"
                 size="md"
-                className="rounded-full hidden sm:block"
+                className="rounded-full hidden sm:block "
                 asChild
                 href="/login"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
               >
                 GET QUOTE
               </Button>
+        
             )}
           </div>
         </div>

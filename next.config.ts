@@ -40,34 +40,43 @@ const nextConfig: NextConfig = {
   // Image optimization
   images: {
     formats: ['image/webp', 'image/avif'],
+    unoptimized: true, // Disable Next.js image optimization temporarily
     remotePatterns: [
+      // Bunny CDN patterns
       {
         protocol: 'https',
-        hostname: 'example-bucket.s3.amazonaws.com',
+        hostname: 'prestious.b-cdn.net',
         port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: '*.s3.amazonaws.com',
+        hostname: '*.b-cdn.net',
         port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: '*.s3.*.amazonaws.com',
+        hostname: 'sg.storage.bunnycdn.com',
         port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: 's3.amazonaws.com',
+        hostname: '*.storage.bunnycdn.com',
+        port: '',
+        pathname: '/**',
+      },
+      // Placeholder images for development
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
         port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: '*.cloudfront.net',
+        hostname: 'via.placeholder.com',
         port: '',
         pathname: '/**',
       },

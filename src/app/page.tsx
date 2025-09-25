@@ -36,7 +36,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/30"></div>
 
         {/* Content overlay */}
-        <div className="relative h-full flex items-start pt-16 pl-8 md:pt-20 md:pl-12 lg:pt-24 lg:pl-16">
+        <div className="relative h-full flex items-start pt-16 pl-8 md:pt-20 md:pl-12 lg:pt-40 lg:pl-16">
           <div className="max-w-2xl">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif text-white leading-tight mb-6">
               <span className="block">Elevate Hospitality</span>
@@ -46,7 +46,7 @@ export default function Home() {
             <Button 
               variant="secondary" 
               size="lg"
-              className="bg-[var(--color-text-tertiary)] hover:bg-[var(--color-text-tertiary)]/90 text-white px-8 py-3 rounded-full"
+              className="border-none bg-[var(--color-text-tertiary)] hover:bg-[var(--color-text-tertiary)]/90 text-white px-8 py-3 rounded-full"
               asChild
               href="/categories"
             >

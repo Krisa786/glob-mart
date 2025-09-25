@@ -31,10 +31,18 @@ export interface Product {
 export interface ProductImage {
   id: number;
   product_id: number;
+  s3_key: string;
   url: string;
-  alt_text?: string;
-  is_primary: boolean;
-  sort_order: number;
+  cdn_url?: string;
+  alt?: string;
+  position: number;
+  width?: number;
+  height?: number;
+  size_variant: 'original' | 'thumb' | 'medium' | 'large';
+  file_size?: number;
+  content_type?: string;
+  image_hash?: string;
+  created_at: string;
 }
 
 export interface ProductSearchParams {
@@ -196,8 +204,33 @@ export const getStockStatus = (product: Product): { status: 'in-stock' | 'low-st
  */
 export const getPrimaryImage = (product: Product): string | null => {
   if (product.images && product.images.length > 0) {
-    const primaryImage = product.images.find(img => img.is_primary);
-    return primaryImage ? primaryImage.url : product.images[0].url;
+    // First try to find the original size image
+    const originalImage = product.images.find(img => img.size_variant === 'original');
+    if (originalImage) {
+      return originalImage.cdn_url || originalImage.url;
+    }
+    
+    // Fallback to the first image
+    const firstImage = product.images[0];
+    return firstImage.cdn_url || firstImage.url;
+  }
+  return null;
+};
+
+/**
+ * Get product image by size variant
+ */
+export const getProductImageBySize = (product: Product, size: 'original' | 'thumb' | 'medium' | 'large'): string | null => {
+  if (product.images && product.images.length > 0) {
+    const image = product.images.find(img => img.size_variant === size);
+    if (image) {
+      return image.cdn_url || image.url;
+    }
+    
+    // Fallback to original if requested size not found
+    if (size !== 'original') {
+      return getProductImageBySize(product, 'original');
+    }
   }
   return null;
 };
