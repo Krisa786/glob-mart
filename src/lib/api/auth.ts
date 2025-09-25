@@ -129,16 +129,16 @@ async function apiRequest<T>(
     }
 
     return await handleResponse<T>(response);
-    } catch (_error) {
-      // Handle network errors
-      // console.error('API request failed:', _error);
-      return {
-        success: false,
-        message: 'Network error. Please check your connection and try again.',
-        errors: [],
-        data: undefined,
-      };
-    }
+  } catch (_error) {
+    // Handle network errors
+    // console.error('API request failed:', _error);
+    return {
+      success: false,
+      message: 'Network error. Please check your connection and try again.',
+      errors: [],
+      data: undefined,
+    };
+  }
 }
 
 // Helper function to handle API responses
@@ -157,7 +157,11 @@ async function handleResponse<T>(response: Response): Promise<ApiResponse<T>> {
 
   if (!response.ok) {
     // Return structured error response instead of throwing
-    const errorData = data as { message?: string; error?: string; errors?: Array<{ field: string; message: string }> };
+    const errorData = data as {
+      message?: string;
+      error?: string;
+      errors?: Array<{ field: string; message: string }>;
+    };
     return {
       success: false,
       message: errorData.message || errorData.error || 'An error occurred',
@@ -213,29 +217,41 @@ async function refreshAccessToken(): Promise<string | null> {
 export const authApi = {
   // Login user
   async login(credentials: LoginRequest): Promise<ApiResponse<AuthResponse>> {
-    return apiRequest<AuthResponse>('/auth/login', {
-      method: 'POST',
-      body: JSON.stringify(credentials),
-    }, true); // Skip auth for login
+    return apiRequest<AuthResponse>(
+      '/auth/login',
+      {
+        method: 'POST',
+        body: JSON.stringify(credentials),
+      },
+      true
+    ); // Skip auth for login
   },
 
   // Register new user
   async register(
     userData: RegisterRequest
   ): Promise<ApiResponse<AuthResponse>> {
-    return apiRequest<AuthResponse>('/auth/register', {
-      method: 'POST',
-      body: JSON.stringify(userData),
-    }, true); // Skip auth for registration
+    return apiRequest<AuthResponse>(
+      '/auth/register',
+      {
+        method: 'POST',
+        body: JSON.stringify(userData),
+      },
+      true
+    ); // Skip auth for registration
   },
 
   // Refresh access token
   async refresh(): Promise<
     ApiResponse<{ access_token: string; expires_in: number }>
   > {
-    return apiRequest('/auth/refresh', {
-      method: 'POST',
-    }, true); // Skip auth for refresh
+    return apiRequest(
+      '/auth/refresh',
+      {
+        method: 'POST',
+      },
+      true
+    ); // Skip auth for refresh
   },
 
   // Logout user
@@ -253,29 +269,46 @@ export const authApi = {
   },
 
   // Forgot password
-  async forgotPassword(data: ForgotPasswordRequest): Promise<ApiResponse<ForgotPasswordResponse>> {
+  async forgotPassword(
+    data: ForgotPasswordRequest
+  ): Promise<ApiResponse<ForgotPasswordResponse>> {
     // Call backend API directly
-    return apiRequest<ForgotPasswordResponse>('/auth/forgot-password', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    }, true); // Skip auth for forgot password, use backend API
+    return apiRequest<ForgotPasswordResponse>(
+      '/auth/forgot-password',
+      {
+        method: 'POST',
+        body: JSON.stringify(data),
+      },
+      true
+    ); // Skip auth for forgot password, use backend API
   },
 
   // Reset password
   async resetPassword(data: ResetPasswordRequest): Promise<ApiResponse> {
     // Call backend API directly
-    return apiRequest('/auth/reset-password', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    }, true); // Skip auth for reset password, use backend API
+    return apiRequest(
+      '/auth/reset-password',
+      {
+        method: 'POST',
+        body: JSON.stringify(data),
+      },
+      true
+    ); // Skip auth for reset password, use backend API
   },
 
   // Verify reset token
-  async verifyResetToken(token: string): Promise<ApiResponse<{ email: string }>> {
-    return apiRequest<{ email: string }>('/auth/verify-reset-token', {
-      method: 'POST',
-      body: JSON.stringify({ token }),
-    }, true, LOCAL_API_BASE_URL); // Skip auth for token verification, use local API
+  async verifyResetToken(
+    token: string
+  ): Promise<ApiResponse<{ email: string }>> {
+    return apiRequest<{ email: string }>(
+      '/auth/verify-reset-token',
+      {
+        method: 'POST',
+        body: JSON.stringify({ token }),
+      },
+      true,
+      LOCAL_API_BASE_URL
+    ); // Skip auth for token verification, use local API
   },
 };
 
@@ -309,7 +342,7 @@ export const tokenManager = {
       const payload = JSON.parse(atob(token.split('.')[1]));
       const now = Math.floor(Date.now() / 1000);
       // Add 30s leeway to account for time skew
-      return payload.exp < (now + 30);
+      return payload.exp < now + 30;
     } catch {
       return true;
     }

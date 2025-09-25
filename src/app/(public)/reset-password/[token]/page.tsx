@@ -13,7 +13,9 @@ export const metadata: Metadata = {
   robots: 'noindex, nofollow', // Password reset pages should not be indexed
 };
 
-export default async function ResetPasswordPage({ params }: ResetPasswordPageProps) {
+export default async function ResetPasswordPage({
+  params,
+}: ResetPasswordPageProps) {
   const resolvedParams = await params;
   const { token } = resolvedParams;
 
@@ -28,7 +30,7 @@ export default async function ResetPasswordPage({ params }: ResetPasswordPagePro
             Enter your new password below to complete the reset process
           </p>
         </div>
-        
+
         <ResetPasswordForm token={token} />
       </div>
     </div>

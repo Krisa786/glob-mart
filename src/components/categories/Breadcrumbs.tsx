@@ -11,7 +11,10 @@ interface BreadcrumbsProps {
   className?: string;
 }
 
-export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) => {
+export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
+  items,
+  className,
+}) => {
   if (!items || items.length === 0) {
     return null;
   }
@@ -29,14 +32,14 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) =>
         <Home className="h-4 w-4" />
         <span className="sr-only">Home</span>
       </Link>
-      
+
       {items.map((item, index) => {
         const isLast = index === items.length - 1;
-        
+
         return (
           <React.Fragment key={item.id}>
             <ChevronRight className="h-4 w-4 text-[var(--color-text-muted)] flex-shrink-0" />
-            
+
             {isLast ? (
               <span
                 className="text-[var(--color-text-primary)] font-medium truncate"

@@ -18,7 +18,8 @@ interface CategoryNodeProps {
   level: number;
   maxDepth: number;
   isExpanded: boolean;
-  onToggle: (categoryId: number) => void;
+   
+  onToggle: (_categoryId: number) => void;
   pathname: string;
 }
 
@@ -32,17 +33,19 @@ const CategoryNode: React.FC<CategoryNodeProps> = ({
 }) => {
   const hasChildren = category.children && category.children.length > 0;
   const isActive = pathname === `/category/${category.slug}`;
-  const isParentActive = pathname.startsWith(`/category/${category.slug}`) && !isActive;
-  
+  const isParentActive =
+    pathname.startsWith(`/category/${category.slug}`) && !isActive;
+
   const indentClass = `ml-${level * 4}`;
-  
+
   return (
     <div className="select-none">
       <div
         className={cn(
           'flex items-center py-2 px-3 rounded-md transition-colors duration-200',
           'hover:bg-[var(--color-background-surface)]',
-          isActive && 'bg-[var(--color-primary-50)] text-[var(--color-text-tertiary)] font-medium',
+          isActive &&
+            'bg-[var(--color-primary-50)] text-[var(--color-text-tertiary)] font-medium',
           isParentActive && 'text-[var(--color-text-tertiary)]',
           level > 0 && indentClass
         )}
@@ -51,7 +54,11 @@ const CategoryNode: React.FC<CategoryNodeProps> = ({
           <button
             onClick={() => onToggle(category.id)}
             className="mr-2 p-1 hover:bg-[var(--color-background-surface)] rounded-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--color-border-focus)]"
-            aria-label={isExpanded ? `Collapse ${category.name}` : `Expand ${category.name}`}
+            aria-label={
+              isExpanded
+                ? `Collapse ${category.name}`
+                : `Expand ${category.name}`
+            }
             aria-expanded={isExpanded}
           >
             {isExpanded ? (
@@ -61,11 +68,11 @@ const CategoryNode: React.FC<CategoryNodeProps> = ({
             )}
           </button>
         )}
-        
+
         {!hasChildren && level < maxDepth && (
           <div className="w-6 mr-2" /> // Spacer for alignment
         )}
-        
+
         <Link
           href={`/category/${category.slug}`}
           className={cn(
@@ -84,7 +91,7 @@ const CategoryNode: React.FC<CategoryNodeProps> = ({
           )}
         </Link>
       </div>
-      
+
       {hasChildren && isExpanded && level < maxDepth && (
         <div className="ml-2">
           {category.children!.map((child) => (
@@ -117,14 +124,21 @@ export const CategoryTree: React.FC<CategoryTreeProps> = ({
   useEffect(() => {
     const currentSlug = pathname.split('/').pop();
     if (currentSlug) {
-      const findAndExpandParents = (cats: Category[], targetSlug: string, parents: number[] = []): void => {
+      const findAndExpandParents = (
+        cats: Category[],
+        targetSlug: string,
+        parents: number[] = []
+      ): void => {
         for (const cat of cats) {
           if (cat.slug === targetSlug) {
-            setExpandedNodes(prev => new Set([...prev, ...parents]));
+            setExpandedNodes((prev) => new Set([...prev, ...parents]));
             return;
           }
           if (cat.children && cat.children.length > 0) {
-            findAndExpandParents(cat.children, targetSlug, [...parents, cat.id]);
+            findAndExpandParents(cat.children, targetSlug, [
+              ...parents,
+              cat.id,
+            ]);
           }
         }
       };
@@ -133,7 +147,7 @@ export const CategoryTree: React.FC<CategoryTreeProps> = ({
   }, [pathname, categories]);
 
   const handleToggle = (categoryId: number) => {
-    setExpandedNodes(prev => {
+    setExpandedNodes((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(categoryId)) {
         newSet.delete(categoryId);

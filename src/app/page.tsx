@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { Droplets, Shield, Toilet, Leaf, Gem, ShieldCheck } from 'lucide-react';
 import { usePageView } from '@/hooks/useAnalytics';
 import { Button } from '@/components/ui/Button';
@@ -43,8 +42,8 @@ export default function Home() {
               <span className="block">Through Care</span>
               <span className="block">& Consistency</span>
             </h1>
-            <Button 
-              variant="secondary" 
+            <Button
+              variant="secondary"
               size="lg"
               className="border-none bg-[var(--color-text-tertiary)] hover:bg-[var(--color-text-tertiary)]/90 text-white px-8 py-3 rounded-full"
               asChild

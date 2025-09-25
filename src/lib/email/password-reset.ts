@@ -19,11 +19,13 @@ export async function sendPasswordResetEmail(
   try {
     // Check if email configuration is valid
     if (!isEmailConfigured()) {
-      throw new Error('Email configuration is missing. Please set SMTP_USER and SMTP_PASS environment variables.');
+      throw new Error(
+        'Email configuration is missing. Please set SMTP_USER and SMTP_PASS environment variables.'
+      );
     }
 
     const resetUrl = `${emailConfig.appUrl}/reset-password/${resetToken}`;
-    
+
     const mailOptions = {
       from: emailConfig.from,
       to: email,

@@ -13,25 +13,31 @@ interface CategoryPageProps {
   }>;
 }
 
-export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: CategoryPageProps): Promise<Metadata> {
   try {
     const resolvedParams = await params;
     const category = await getCategoryBySlug(resolvedParams.slug);
-    
+
     return {
       title: `${category.name} | Global International`,
-      description: category.description || `Browse ${category.name} products from Global International. Premium hospitality and healthcare supplies.`,
+      description:
+        category.description ||
+        `Browse ${category.name} products from Global International. Premium hospitality and healthcare supplies.`,
       keywords: `${category.name}, hospitality supplies, healthcare products, ${category.name.toLowerCase()}`,
       openGraph: {
         title: `${category.name} | Global International`,
-        description: category.description || `Browse ${category.name} products from Global International.`,
+        description:
+          category.description ||
+          `Browse ${category.name} products from Global International.`,
         type: 'website',
       },
       alternates: {
         canonical: `/category/${resolvedParams.slug}`,
       },
     };
-  } catch (error) {
+  } catch (_error) {
     return {
       title: 'Category Not Found | Global International',
       description: 'The requested category could not be found.',
@@ -39,26 +45,29 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   }
 }
 
-export default async function CategorySlugPage({ params, searchParams }: CategoryPageProps) {
+export default async function CategorySlugPage({
+  params,
+  searchParams,
+}: CategoryPageProps) {
   try {
     const resolvedParams = await params;
     const resolvedSearchParams = await searchParams;
-    
+
     const category = await getCategoryBySlug(resolvedParams.slug);
     const breadcrumb = await getCategoryBreadcrumb(category.id);
-    
+
     const page = parseInt(resolvedSearchParams.page || '1');
     const sort = resolvedSearchParams.sort || 'newest';
 
     return (
-      <CategoryPage 
+      <CategoryPage
         category={category}
         breadcrumb={breadcrumb}
         currentPage={page}
         sortBy={sort}
       />
     );
-  } catch (error) {
+  } catch (_error) {
     notFound();
   }
 }

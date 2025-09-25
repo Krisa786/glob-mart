@@ -7,6 +7,7 @@ The forgot password API is now working! In development mode, it will log the res
 ### Test the Functionality
 
 1. **Start the development server**:
+
    ```bash
    npm run dev
    ```
@@ -19,6 +20,7 @@ The forgot password API is now working! In development mode, it will log the res
 ### Example Console Output
 
 When you submit a password reset request, you'll see:
+
 ```
 🔗 Password reset link for user@example.com: http://localhost:3000/reset-password/abc123def456...
 ```
@@ -58,6 +60,7 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 ## Features
 
 ✅ **Working Features**:
+
 - Password reset request handling
 - Rate limiting (5 requests per hour)
 - Token generation and storage

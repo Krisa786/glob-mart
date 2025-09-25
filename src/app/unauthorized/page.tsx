@@ -39,7 +39,7 @@ export default function UnauthorizedPage() {
             <Home className="h-5 w-5 mr-2" />
             Go to Dashboard
           </Link>
-          
+
           <Link
             href="/"
             className="inline-flex items-center justify-center w-full px-4 py-3 border border-stone-300 text-base font-medium rounded-lg text-stone-700 bg-white hover:bg-stone-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-colors duration-200"

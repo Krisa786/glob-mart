@@ -25,14 +25,14 @@ export const Pagination: React.FC<PaginationProps> = ({
   const createPageUrl = (page: number) => {
     const url = new URL(baseUrl, window.location.origin);
     url.searchParams.set('page', page.toString());
-    
+
     // Preserve other search parameters
     Object.entries(searchParams).forEach(([key, value]) => {
       if (key !== 'page') {
         url.searchParams.set(key, value);
       }
     });
-    
+
     return url.pathname + url.search;
   };
 

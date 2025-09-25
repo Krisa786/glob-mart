@@ -5,7 +5,9 @@ interface CategoryTreeSkeletonProps {
   className?: string;
 }
 
-export const CategoryTreeSkeleton: React.FC<CategoryTreeSkeletonProps> = ({ className }) => {
+export const CategoryTreeSkeleton: React.FC<CategoryTreeSkeletonProps> = ({
+  className,
+}) => {
   return (
     <div
       className={cn(

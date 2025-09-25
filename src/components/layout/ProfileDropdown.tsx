@@ -2,15 +2,15 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { 
-  User, 
-  ChevronDown, 
-  LogIn, 
-  LogOut, 
-  UserCircle, 
-  Package, 
-  Heart, 
-  Settings 
+import {
+  User,
+  ChevronDown,
+  LogIn,
+  LogOut,
+  UserCircle,
+  Package,
+  Heart,
+  Settings,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useSession } from '@/contexts/SessionContext';
@@ -78,11 +78,11 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
   };
 
   // Get menu items based on user role
-  const menuItems = getUserMenuItems({ 
-    isAuthenticated, 
-    isLoading: false, 
-    user, 
-    roles: user?.roles || [] 
+  const menuItems = getUserMenuItems({
+    isAuthenticated,
+    isLoading: false,
+    user,
+    roles: user?.roles || [],
   });
 
   return (
@@ -133,8 +133,9 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
 
               {/* Dynamic Menu Items */}
               {menuItems.map((item, index) => {
-                const IconComponent = iconMap[item.icon as keyof typeof iconMap];
-                
+                const IconComponent =
+                  iconMap[item.icon as keyof typeof iconMap];
+
                 if (item.action === 'logout') {
                   return (
                     <button
@@ -142,7 +143,9 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
                       onClick={handleLogout}
                       className="w-full flex items-center px-4 py-2 text-sm text-stone-700 hover:bg-stone-50 hover:text-red-600 transition-colors duration-200"
                     >
-                      {IconComponent && <IconComponent className="h-4 w-4 mr-3" />}
+                      {IconComponent && (
+                        <IconComponent className="h-4 w-4 mr-3" />
+                      )}
                       {item.label}
                     </button>
                   );
@@ -155,7 +158,9 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
                     className="flex items-center px-4 py-2 text-sm text-stone-700 hover:bg-stone-50 hover:text-teal-800 transition-colors duration-200"
                     onClick={() => setIsOpen(false)}
                   >
-                    {IconComponent && <IconComponent className="h-4 w-4 mr-3" />}
+                    {IconComponent && (
+                      <IconComponent className="h-4 w-4 mr-3" />
+                    )}
                     {item.label}
                   </Link>
                 );
@@ -169,8 +174,9 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
               </div>
 
               {menuItems.map((item, index) => {
-                const IconComponent = iconMap[item.icon as keyof typeof iconMap];
-                
+                const IconComponent =
+                  iconMap[item.icon as keyof typeof iconMap];
+
                 return (
                   <Link
                     key={index}
@@ -178,7 +184,9 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
                     className="flex items-center px-4 py-2 text-sm text-stone-700 hover:bg-stone-50 hover:text-teal-800 transition-colors duration-200"
                     onClick={() => setIsOpen(false)}
                   >
-                    {IconComponent && <IconComponent className="h-4 w-4 mr-3" />}
+                    {IconComponent && (
+                      <IconComponent className="h-4 w-4 mr-3" />
+                    )}
                     {item.label}
                   </Link>
                 );

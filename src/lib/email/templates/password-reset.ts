@@ -1,4 +1,7 @@
-export function renderPasswordResetEmail(resetUrl: string, email: string): string {
+export function renderPasswordResetEmail(
+  resetUrl: string,
+  email: string
+): string {
   return `
     <!DOCTYPE html>
     <html lang="en">

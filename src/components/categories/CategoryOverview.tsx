@@ -15,10 +15,10 @@ interface CategoryCardProps {
   level: number;
 }
 
-const CategoryCard: React.FC<CategoryCardProps> = ({ category, level }) => {
+const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
   const hasChildren = category.children && category.children.length > 0;
   const maxDisplayChildren = 4; // Show max 4 subcategories
-  
+
   return (
     <div className="bg-[var(--color-background-surface)] rounded-lg border border-[var(--color-border-primary)] p-6 shadow-sm hover:shadow-md transition-shadow duration-200">
       <div className="mb-4">
@@ -34,13 +34,13 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, level }) => {
           </span>
         )}
       </div>
-      
+
       {category.description && (
         <p className="text-[var(--color-text-secondary)] text-sm mb-4 line-clamp-2">
           {category.description}
         </p>
       )}
-      
+
       {hasChildren && (
         <div>
           <h4 className="text-sm font-medium text-[var(--color-text-primary)] mb-2">
@@ -82,7 +82,7 @@ export const CategoryOverview: React.FC<CategoryOverviewProps> = ({
 }) => {
   // Filter out inactive categories and sort by name
   const activeCategories = categories
-    .filter(cat => cat.is_active)
+    .filter((cat) => cat.is_active)
     .sort((a, b) => a.name.localeCompare(b.name));
 
   if (activeCategories.length === 0) {
@@ -90,7 +90,9 @@ export const CategoryOverview: React.FC<CategoryOverviewProps> = ({
       <div className={cn('text-center py-12', className)}>
         <div className="text-[var(--color-text-muted)]">
           <p className="text-lg mb-2">No categories available</p>
-          <p className="text-sm">Please check back later for our product categories.</p>
+          <p className="text-sm">
+            Please check back later for our product categories.
+          </p>
         </div>
       </div>
     );

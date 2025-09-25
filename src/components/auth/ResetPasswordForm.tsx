@@ -8,7 +8,10 @@ import { CheckCircle, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Alert } from '@/components/ui/Alert';
-import { resetPasswordSchema, type ResetPasswordFormData } from '@/lib/validations/auth';
+import {
+  resetPasswordSchema,
+  type ResetPasswordFormData,
+} from '@/lib/validations/auth';
 import { authApi } from '@/lib/api/auth';
 
 interface ResetPasswordFormProps {
@@ -21,7 +24,7 @@ export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
-  
+
   const router = useRouter();
 
   const {
@@ -60,11 +63,20 @@ export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
     } catch (error) {
       // Log error for debugging
       // console.error('Reset password error:', error);
-      const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.';
-      
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : 'An unexpected error occurred. Please try again.';
+
       // Handle specific token-related errors
-      if (errorMessage.includes('token') || errorMessage.includes('expired') || errorMessage.includes('invalid')) {
-        setError('This password reset link is invalid or has expired. Please request a new password reset.');
+      if (
+        errorMessage.includes('token') ||
+        errorMessage.includes('expired') ||
+        errorMessage.includes('invalid')
+      ) {
+        setError(
+          'This password reset link is invalid or has expired. Please request a new password reset.'
+        );
       } else {
         setError(errorMessage);
       }
@@ -84,7 +96,8 @@ export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
           Password Reset Successful
         </h2>
         <p className="text-sm text-gray-600 mb-6">
-          Your password has been successfully reset. You will be redirected to the login page shortly.
+          Your password has been successfully reset. You will be redirected to
+          the login page shortly.
         </p>
         <div className="flex justify-center">
           <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-teal-600"></div>
@@ -161,23 +174,33 @@ export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
             Password Requirements:
           </h4>
           <ul className="text-sm text-stone-600 space-y-1">
-            <li className={`flex items-center ${password && password.length >= 8 ? 'text-green-600' : ''}`}>
+            <li
+              className={`flex items-center ${password && password.length >= 8 ? 'text-green-600' : ''}`}
+            >
               <span className="mr-2">•</span>
               At least 8 characters long
             </li>
-            <li className={`flex items-center ${password && /[a-z]/.test(password) ? 'text-green-600' : ''}`}>
+            <li
+              className={`flex items-center ${password && /[a-z]/.test(password) ? 'text-green-600' : ''}`}
+            >
               <span className="mr-2">•</span>
               Contains at least one lowercase letter
             </li>
-            <li className={`flex items-center ${password && /[A-Z]/.test(password) ? 'text-green-600' : ''}`}>
+            <li
+              className={`flex items-center ${password && /[A-Z]/.test(password) ? 'text-green-600' : ''}`}
+            >
               <span className="mr-2">•</span>
               Contains at least one uppercase letter
             </li>
-            <li className={`flex items-center ${password && /\d/.test(password) ? 'text-green-600' : ''}`}>
+            <li
+              className={`flex items-center ${password && /\d/.test(password) ? 'text-green-600' : ''}`}
+            >
               <span className="mr-2">•</span>
               Contains at least one number
             </li>
-            <li className={`flex items-center ${password && /[^A-Za-z0-9]/.test(password) ? 'text-green-600' : ''}`}>
+            <li
+              className={`flex items-center ${password && /[^A-Za-z0-9]/.test(password) ? 'text-green-600' : ''}`}
+            >
               <span className="mr-2">•</span>
               Contains at least one special character
             </li>
@@ -185,11 +208,7 @@ export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
         </div>
 
         <div className="space-y-4">
-          <Button
-            type="submit"
-            className="w-full"
-            disabled={isLoading}
-          >
+          <Button type="submit" className="w-full" disabled={isLoading}>
             {isLoading ? 'Resetting Password...' : 'Reset Password'}
           </Button>
 

@@ -40,7 +40,7 @@ export function hasRole(roles: string[], role: string): boolean {
  * @returns boolean indicating if user has any of the required roles
  */
 export function hasAnyRole(roles: string[], requiredRoles: string[]): boolean {
-  return requiredRoles.some(role => roles.includes(role));
+  return requiredRoles.some((role) => roles.includes(role));
 }
 
 /**
@@ -49,7 +49,11 @@ export function hasAnyRole(roles: string[], requiredRoles: string[]): boolean {
  * @returns boolean indicating if user is authenticated
  */
 export function isAuthenticated(sessionState: SessionState): boolean {
-  return sessionState.isAuthenticated && !sessionState.isLoading && sessionState.user !== null;
+  return (
+    sessionState.isAuthenticated &&
+    !sessionState.isLoading &&
+    sessionState.user !== null
+  );
 }
 
 /**
@@ -104,7 +108,7 @@ export function canAccessCustomer(sessionState: SessionState): boolean {
  */
 export function getNavigationItems(sessionState: SessionState) {
   const { isAuthenticated, roles } = sessionState;
-  
+
   if (!isAuthenticated) {
     return [
       { label: 'Categories', href: '/categories', public: true },
@@ -125,14 +129,12 @@ export function getNavigationItems(sessionState: SessionState) {
   if (isCustomer(roles)) {
     baseItems.push(
       { label: 'My Account', href: '/account', public: false },
-      { label: 'Orders', href: '/orders', public: false },
+      { label: 'Orders', href: '/orders', public: false }
     );
   }
 
   if (isAdmin(roles)) {
-    baseItems.push(
-      { label: 'Admin', href: '/admin', public: false },
-    );
+    baseItems.push({ label: 'Admin', href: '/admin', public: false });
   }
 
   return baseItems;
@@ -152,7 +154,7 @@ export interface MenuItem {
  */
 export function getUserMenuItems(sessionState: SessionState): MenuItem[] {
   const { isAuthenticated, roles } = sessionState;
-  
+
   if (!isAuthenticated) {
     return [
       { label: 'Sign In', href: '/login', icon: 'LogIn' },
@@ -168,19 +170,20 @@ export function getUserMenuItems(sessionState: SessionState): MenuItem[] {
   if (isCustomer(roles)) {
     menuItems.push(
       { label: 'Orders', href: '/orders', icon: 'Package' },
-      { label: 'Wishlist', href: '/wishlist', icon: 'Heart' },
+      { label: 'Wishlist', href: '/wishlist', icon: 'Heart' }
     );
   }
 
   if (isAdmin(roles)) {
-    menuItems.push(
-      { label: 'Admin Panel', href: '/admin', icon: 'Settings' },
-    );
+    menuItems.push({ label: 'Admin Panel', href: '/admin', icon: 'Settings' });
   }
 
-  menuItems.push(
-    { label: 'Sign Out', href: '#', icon: 'LogOut', action: 'logout' },
-  );
+  menuItems.push({
+    label: 'Sign Out',
+    href: '#',
+    icon: 'LogOut',
+    action: 'logout',
+  });
 
   return menuItems;
 }

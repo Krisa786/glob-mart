@@ -80,16 +80,16 @@ export async function apiRequest<T>(
     }
 
     return await handleResponse<T>(response);
-    } catch (_error) {
-      // Handle network errors
-      // console.error('API request failed:', _error);
-      return {
-        success: false,
-        message: 'Network error. Please check your connection and try again.',
-        errors: [],
-        data: undefined,
-      };
-    }
+  } catch (_error) {
+    // Handle network errors
+    // console.error('API request failed:', _error);
+    return {
+      success: false,
+      message: 'Network error. Please check your connection and try again.',
+      errors: [],
+      data: undefined,
+    };
+  }
 }
 
 // Helper function to handle API responses
@@ -108,7 +108,11 @@ async function handleResponse<T>(response: Response): Promise<ApiResponse<T>> {
 
   if (!response.ok) {
     // Return structured error response instead of throwing
-    const errorData = data as { message?: string; error?: string; errors?: Array<{ field: string; message: string }> };
+    const errorData = data as {
+      message?: string;
+      error?: string;
+      errors?: Array<{ field: string; message: string }>;
+    };
     return {
       success: false,
       message: errorData.message || errorData.error || 'An error occurred',
@@ -164,25 +168,37 @@ async function refreshAccessToken(): Promise<string | null> {
 export const api = {
   get: <T>(endpoint: string, skipAuth = false) =>
     apiRequest<T>(endpoint, { method: 'GET' }, skipAuth),
-  
+
   post: <T>(endpoint: string, data?: unknown, skipAuth = false) =>
-    apiRequest<T>(endpoint, {
-      method: 'POST',
-      body: data ? JSON.stringify(data) : undefined,
-    }, skipAuth),
-  
+    apiRequest<T>(
+      endpoint,
+      {
+        method: 'POST',
+        body: data ? JSON.stringify(data) : undefined,
+      },
+      skipAuth
+    ),
+
   put: <T>(endpoint: string, data?: unknown, skipAuth = false) =>
-    apiRequest<T>(endpoint, {
-      method: 'PUT',
-      body: data ? JSON.stringify(data) : undefined,
-    }, skipAuth),
-  
+    apiRequest<T>(
+      endpoint,
+      {
+        method: 'PUT',
+        body: data ? JSON.stringify(data) : undefined,
+      },
+      skipAuth
+    ),
+
   patch: <T>(endpoint: string, data?: unknown, skipAuth = false) =>
-    apiRequest<T>(endpoint, {
-      method: 'PATCH',
-      body: data ? JSON.stringify(data) : undefined,
-    }, skipAuth),
-  
+    apiRequest<T>(
+      endpoint,
+      {
+        method: 'PATCH',
+        body: data ? JSON.stringify(data) : undefined,
+      },
+      skipAuth
+    ),
+
   delete: <T>(endpoint: string, skipAuth = false) =>
     apiRequest<T>(endpoint, { method: 'DELETE' }, skipAuth),
 };

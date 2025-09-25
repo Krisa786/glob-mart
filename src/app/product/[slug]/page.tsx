@@ -8,25 +8,31 @@ interface ProductPageProps {
   }>;
 }
 
-export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: ProductPageProps): Promise<Metadata> {
   try {
     const resolvedParams = await params;
     const product = await getProductBySlug(resolvedParams.slug);
-    
+
     return {
       title: `${product.title} | Global International`,
-      description: product.short_desc || `Buy ${product.title} from Global International. Premium hospitality and healthcare supplies.`,
+      description:
+        product.short_desc ||
+        `Buy ${product.title} from Global International. Premium hospitality and healthcare supplies.`,
       keywords: `${product.title}, ${product.brand}, hospitality supplies, healthcare products`,
       openGraph: {
         title: `${product.title} | Global International`,
-        description: product.short_desc || `Buy ${product.title} from Global International.`,
+        description:
+          product.short_desc ||
+          `Buy ${product.title} from Global International.`,
         type: 'website',
       },
       alternates: {
         canonical: `/product/${resolvedParams.slug}`,
       },
     };
-  } catch (error) {
+  } catch (_error) {
     return {
       title: 'Product Not Found | Global International',
       description: 'The requested product could not be found.',
@@ -54,23 +60,36 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 Product Information
               </h2>
               <div className="space-y-2 text-left">
-                <p><strong>SKU:</strong> {product.sku}</p>
-                <p><strong>Brand:</strong> {product.brand || 'N/A'}</p>
-                <p><strong>Price:</strong> {new Intl.NumberFormat('en-US', {
-                  style: 'currency',
-                  currency: product.currency,
-                }).format(product.price)}</p>
-                <p><strong>Status:</strong> {product.status}</p>
-                {product.sustainability_badges && product.sustainability_badges.length > 0 && (
-                  <p><strong>Sustainability Badges:</strong> {product.sustainability_badges.join(', ')}</p>
-                )}
+                <p>
+                  <strong>SKU:</strong> {product.sku}
+                </p>
+                <p>
+                  <strong>Brand:</strong> {product.brand || 'N/A'}
+                </p>
+                <p>
+                  <strong>Price:</strong>{' '}
+                  {new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: product.currency,
+                  }).format(product.price)}
+                </p>
+                <p>
+                  <strong>Status:</strong> {product.status}
+                </p>
+                {product.sustainability_badges &&
+                  product.sustainability_badges.length > 0 && (
+                    <p>
+                      <strong>Sustainability Badges:</strong>{' '}
+                      {product.sustainability_badges.join(', ')}
+                    </p>
+                  )}
               </div>
             </div>
           </div>
         </div>
       </div>
     );
-  } catch (error) {
+  } catch (_error) {
     notFound();
   }
 }

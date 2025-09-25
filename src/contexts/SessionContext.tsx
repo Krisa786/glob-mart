@@ -1,6 +1,12 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from 'react';
 import { useRouter } from 'next/navigation';
 import { authApi, tokenManager, type User } from '@/lib/api/auth';
 
@@ -38,7 +44,7 @@ export function SessionProvider({ children }: SessionProviderProps) {
   const initializeSession = useCallback(async () => {
     try {
       const token = tokenManager.getAccessToken();
-      
+
       if (!token || tokenManager.isTokenExpired(token)) {
         // Token is missing or expired, clear session
         tokenManager.removeAccessToken();
@@ -135,7 +141,7 @@ export function SessionProvider({ children }: SessionProviderProps) {
     try {
       const response = await authApi.getCurrentUser();
       if (response.success && response.data) {
-        setSessionState(prev => ({
+        setSessionState((prev) => ({
           ...prev,
           user: response.data!.user,
           roles: response.data!.user.roles || [],
@@ -164,13 +170,19 @@ export function SessionProvider({ children }: SessionProviderProps) {
   }, []);
 
   // Role checking functions
-  const hasRole = useCallback((role: string) => {
-    return sessionState.roles.includes(role);
-  }, [sessionState.roles]);
+  const hasRole = useCallback(
+    (role: string) => {
+      return sessionState.roles.includes(role);
+    },
+    [sessionState.roles]
+  );
 
-  const hasAnyRole = useCallback((roles: string[]) => {
-    return roles.some(role => sessionState.roles.includes(role));
-  }, [sessionState.roles]);
+  const hasAnyRole = useCallback(
+    (roles: string[]) => {
+      return roles.some((role) => sessionState.roles.includes(role));
+    },
+    [sessionState.roles]
+  );
 
   // Initialize session on mount
   useEffect(() => {
@@ -186,9 +198,12 @@ export function SessionProvider({ children }: SessionProviderProps) {
     if (timeUntilExpiry <= 0) return;
 
     // Set up a timer to refresh the session before token expires
-    const refreshTimer = setTimeout(() => {
-      refreshSession();
-    }, (timeUntilExpiry - 60) * 1000); // Refresh 1 minute before expiry
+    const refreshTimer = setTimeout(
+      () => {
+        refreshSession();
+      },
+      (timeUntilExpiry - 60) * 1000
+    ); // Refresh 1 minute before expiry
 
     return () => clearTimeout(refreshTimer);
   }, [sessionState.isAuthenticated, refreshSession]);
@@ -234,7 +249,10 @@ export function withAuth<P extends object>(
           return;
         }
 
-        if (requiredRoles && !requiredRoles.some(role => roles.includes(role))) {
+        if (
+          requiredRoles &&
+          !requiredRoles.some((role) => roles.includes(role))
+        ) {
           router.push('/unauthorized');
           return;
         }
@@ -253,7 +271,7 @@ export function withAuth<P extends object>(
       return null;
     }
 
-    if (requiredRoles && !requiredRoles.some(role => roles.includes(role))) {
+    if (requiredRoles && !requiredRoles.some((role) => roles.includes(role))) {
       return null;
     }
 

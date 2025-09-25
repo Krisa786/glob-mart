@@ -10,16 +10,19 @@ export const emailConfig = {
       pass: process.env.SMTP_PASS,
     },
   },
-  
+
   // Email settings
   from: {
     name: 'Global International',
-    address: process.env.SMTP_FROM || process.env.SMTP_USER || 'noreply@globalinternational.com',
+    address:
+      process.env.SMTP_FROM ||
+      process.env.SMTP_USER ||
+      'noreply@globalinternational.com',
   },
-  
+
   // App settings
   appUrl: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
-  
+
   // Rate limiting
   rateLimit: {
     maxRequests: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '5'),
@@ -30,19 +33,19 @@ export const emailConfig = {
 // Validate email configuration
 export function validateEmailConfig(): { valid: boolean; errors: string[] } {
   const errors: string[] = [];
-  
+
   if (!emailConfig.smtp.auth.user) {
     errors.push('SMTP_USER is required');
   }
-  
+
   if (!emailConfig.smtp.auth.pass) {
     errors.push('SMTP_PASS is required');
   }
-  
+
   if (!emailConfig.smtp.host) {
     errors.push('SMTP_HOST is required');
   }
-  
+
   return {
     valid: errors.length === 0,
     errors,

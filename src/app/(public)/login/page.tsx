@@ -48,7 +48,8 @@ export default function LoginPage() {
       // console.error('Login error:', error);
 
       // Handle different error types
-      const errorMessage = error instanceof Error ? error.message : 'An error occurred';
+      const errorMessage =
+        error instanceof Error ? error.message : 'An error occurred';
       if (errorMessage.includes('2FA')) {
         setAlert({
           type: 'info',

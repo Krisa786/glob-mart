@@ -18,15 +18,18 @@ interface CategoryPageProps {
 export const CategoryPage: React.FC<CategoryPageProps> = ({
   category,
   breadcrumb,
-  currentPage,
-  sortBy,
   className,
 }) => {
   const hasChildren = category.children && category.children.length > 0;
-  const hasProducts = category.product_count && category.product_count > 0;
+  // const hasProducts = category.product_count && category.product_count > 0;
 
   return (
-    <div className={cn('min-h-screen bg-[var(--color-background-primary)]', className)}>
+    <div
+      className={cn(
+        'min-h-screen bg-[var(--color-background-primary)]',
+        className
+      )}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumbs */}
         <div className="mb-6">
@@ -54,8 +57,8 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
           {/* Sidebar - Category Tree */}
           <aside className="lg:col-span-1">
             <div className="sticky top-8">
-              <CategoryTree 
-                categories={[category]} 
+              <CategoryTree
+                categories={[category]}
                 maxDepth={2}
                 className="mb-6"
               />

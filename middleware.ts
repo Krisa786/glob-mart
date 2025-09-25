@@ -12,16 +12,10 @@ const protectedRoutes = [
 ];
 
 // Define admin-only routes
-const adminRoutes = [
-  '/admin',
-];
+const adminRoutes = ['/admin'];
 
 // Define public routes that should redirect to account if authenticated
-const publicRoutes = [
-  '/login',
-  '/register',
-  '/forgot-password',
-];
+const publicRoutes = ['/login', '/register', '/forgot-password'];
 
 // Define routes that should always be accessible
 const alwaysAccessibleRoutes = [
@@ -39,7 +33,7 @@ const alwaysAccessibleRoutes = [
  * Check if a pathname matches any of the given route patterns
  */
 function matchesRoute(pathname: string, routes: string[]): boolean {
-  return routes.some(route => {
+  return routes.some((route) => {
     if (route === '/') {
       return pathname === '/';
     }
@@ -54,12 +48,12 @@ function isTokenValid(token: string): boolean {
   try {
     const parts = token.split('.');
     if (parts.length !== 3) return false;
-    
+
     const payload = JSON.parse(atob(parts[1]));
     const now = Math.floor(Date.now() / 1000);
-    
+
     // Add 30s leeway to account for time skew
-    return payload.exp > (now + 30);
+    return payload.exp > now + 30;
   } catch {
     return false;
   }
@@ -75,12 +69,12 @@ function getRedirectUrl(request: NextRequest): string {
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  
+
   // Skip middleware for always accessible routes
   if (matchesRoute(pathname, alwaysAccessibleRoutes)) {
     return NextResponse.next();
   }
-  
+
   // Get access token from localStorage via cookie (set by client-side)
   const accessToken = request.cookies.get('access_token')?.value;
 

@@ -3,7 +3,12 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Product, formatPrice, getStockStatus, getPrimaryImage } from '@/lib/api/products';
+import {
+  Product,
+  formatPrice,
+  getStockStatus,
+  getPrimaryImage,
+} from '@/lib/api/products';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
@@ -13,7 +18,10 @@ interface ProductCardProps {
   className?: string;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({
+  product,
+  className,
+}) => {
   const stockStatus = getStockStatus(product);
   const primaryImage = getPrimaryImage(product);
   const isOutOfStock = stockStatus.status === 'out-of-stock';
@@ -29,15 +37,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className }) 
       {/* Product Image */}
       <div className="relative aspect-square overflow-hidden bg-[var(--color-background-secondary)]">
         {primaryImage ? (
-          <img
+          <Image
             src={primaryImage}
             alt={product.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-            onError={(e) => {
-              console.warn('Failed to load product image:', primaryImage);
-              // Hide the image element on error
-              e.currentTarget.style.display = 'none';
-            }}
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-200"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
         ) : (
           <div className="flex items-center justify-center h-full">
@@ -49,7 +54,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className }) 
             </div>
           </div>
         )}
-        
+
         {/* Stock Status Badge */}
         <div className="absolute top-2 left-2">
           <Badge
@@ -57,8 +62,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className }) 
               stockStatus.status === 'in-stock'
                 ? 'success'
                 : stockStatus.status === 'low-stock'
-                ? 'warning'
-                : 'error'
+                  ? 'warning'
+                  : 'error'
             }
             size="sm"
           >
@@ -67,15 +72,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className }) 
         </div>
 
         {/* Sustainability Badges */}
-        {product.sustainability_badges && product.sustainability_badges.length > 0 && (
-          <div className="absolute top-2 right-2 flex flex-col gap-1">
-            {product.sustainability_badges.slice(0, 2).map((badge, index) => (
-              <Badge key={index} variant="secondary" size="sm">
-                {badge}
-              </Badge>
-            ))}
-          </div>
-        )}
+        {product.sustainability_badges &&
+          product.sustainability_badges.length > 0 && (
+            <div className="absolute top-2 right-2 flex flex-col gap-1">
+              {product.sustainability_badges.slice(0, 2).map((badge, index) => (
+                <Badge key={index} variant="secondary" size="sm">
+                  {badge}
+                </Badge>
+              ))}
+            </div>
+          )}
       </div>
 
       {/* Product Info */}

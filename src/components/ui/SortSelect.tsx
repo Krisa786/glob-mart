@@ -12,7 +12,7 @@ interface SortOption {
 interface SortSelectProps {
   options?: SortOption[];
   className?: string;
-  placeholder?: string;
+  // placeholder?: string;
 }
 
 const defaultSortOptions: SortOption[] = [
@@ -26,7 +26,7 @@ const defaultSortOptions: SortOption[] = [
 export const SortSelect: React.FC<SortSelectProps> = ({
   options = defaultSortOptions,
   className,
-  placeholder = 'Sort by...',
+  // placeholder = 'Sort by...',
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -35,16 +35,16 @@ export const SortSelect: React.FC<SortSelectProps> = ({
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newSort = event.target.value;
     const params = new URLSearchParams(searchParams.toString());
-    
+
     if (newSort === 'newest') {
       params.delete('sort');
     } else {
       params.set('sort', newSort);
     }
-    
+
     // Reset to first page when sorting changes
     params.delete('page');
-    
+
     router.push(`?${params.toString()}`);
   };
 
@@ -69,7 +69,7 @@ export const SortSelect: React.FC<SortSelectProps> = ({
           </option>
         ))}
       </select>
-      
+
       {/* Custom dropdown arrow */}
       <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
         <svg

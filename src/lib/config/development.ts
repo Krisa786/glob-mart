@@ -2,10 +2,13 @@
 export const developmentConfig = {
   // Email configuration for development
   email: {
-    enabled: process.env.NODE_ENV === 'production' || (process.env.SMTP_USER && process.env.SMTP_PASS),
-    logResetLinks: process.env.NODE_ENV === 'development' && !process.env.SMTP_USER,
+    enabled:
+      process.env.NODE_ENV === 'production' ||
+      (process.env.SMTP_USER && process.env.SMTP_PASS),
+    logResetLinks:
+      process.env.NODE_ENV === 'development' && !process.env.SMTP_USER,
   },
-  
+
   // API configuration
   api: {
     logRequests: process.env.NODE_ENV === 'development',

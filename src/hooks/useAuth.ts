@@ -8,7 +8,7 @@ import { useSession } from '@/contexts/SessionContext';
  */
 export function useAuth() {
   const session = useSession();
-  
+
   return {
     user: session.user,
     isLoading: session.isLoading,

@@ -84,16 +84,17 @@ export default function ForgotPasswordPage() {
       } else {
         // Handle API error response
         const errorMessage = response.message || 'An error occurred';
-        
+
         // Check if it's a rate limiting error (429)
-        if (errorMessage.toLowerCase().includes('too many') || 
-            errorMessage.toLowerCase().includes('rate limit') ||
-            errorMessage.toLowerCase().includes('429')) {
-          
+        if (
+          errorMessage.toLowerCase().includes('too many') ||
+          errorMessage.toLowerCase().includes('rate limit') ||
+          errorMessage.toLowerCase().includes('429')
+        ) {
           // Try to extract retryAfter from the response if available
           const retryAfterSeconds = response.retryAfter || 3600; // Default to 1 hour
           setRetryAfter(retryAfterSeconds);
-          
+
           const hours = Math.ceil(retryAfterSeconds / 3600);
           setAlert({
             type: 'error',
@@ -114,12 +115,14 @@ export default function ForgotPasswordPage() {
       // console.error('Forgot password error:', error);
 
       // Handle network or unexpected errors
-      const errorMessage = error instanceof Error ? error.message : 'An error occurred';
+      const errorMessage =
+        error instanceof Error ? error.message : 'An error occurred';
       if (errorMessage.includes('rate limit') || errorMessage.includes('429')) {
         setRetryAfter(3600); // Default to 1 hour
         setAlert({
           type: 'error',
-          message: 'Too many password reset attempts. Please try again in 1 hour.',
+          message:
+            'Too many password reset attempts. Please try again in 1 hour.',
         });
       } else {
         // For security, we show the same success message regardless of whether the email exists
@@ -171,7 +174,8 @@ export default function ForgotPasswordPage() {
                   </h3>
                   <div className="mt-2 text-sm text-blue-700">
                     <p className="mb-2">
-                      If you don&apos;t receive the email, you can use this direct link:
+                      If you don&apos;t receive the email, you can use this
+                      direct link:
                     </p>
                     <div className="bg-white rounded border p-2 break-all">
                       <code className="text-xs text-blue-600">{resetLink}</code>
@@ -250,8 +254,8 @@ export default function ForgotPasswordPage() {
             Reset Password
           </h1>
           <p className="mt-2 text-sm text-stone-600">
-            Enter your email address and we&apos;ll send you a link to reset your
-            password
+            Enter your email address and we&apos;ll send you a link to reset
+            your password
           </p>
         </div>
 
@@ -296,14 +300,13 @@ export default function ForgotPasswordPage() {
                 </div>
 
                 <div className="mt-8">
-                  <SubmitButton 
+                  <SubmitButton
                     isLoading={isLoading}
                     disabled={timeLeft !== null && timeLeft > 0}
                   >
-                    {timeLeft && timeLeft > 0 
+                    {timeLeft && timeLeft > 0
                       ? `Try again in ${formatTime(timeLeft)}`
-                      : 'Send Reset Link'
-                    }
+                      : 'Send Reset Link'}
                   </SubmitButton>
                 </div>
               </>

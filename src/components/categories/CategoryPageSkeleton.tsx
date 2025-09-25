@@ -5,9 +5,16 @@ interface CategoryPageSkeletonProps {
   className?: string;
 }
 
-export const CategoryPageSkeleton: React.FC<CategoryPageSkeletonProps> = ({ className }) => {
+export const CategoryPageSkeleton: React.FC<CategoryPageSkeletonProps> = ({
+  className,
+}) => {
   return (
-    <div className={cn('min-h-screen bg-[var(--color-background-primary)]', className)}>
+    <div
+      className={cn(
+        'min-h-screen bg-[var(--color-background-primary)]',
+        className
+      )}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumbs Skeleton */}
         <div className="mb-6">

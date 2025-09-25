@@ -4,11 +4,14 @@ import { getCategoryTree } from '@/lib/api/categories';
 
 export const metadata: Metadata = {
   title: 'Product Categories | Global International',
-  description: 'Browse our comprehensive range of hospitality and healthcare supplies organized by category. Find everything you need for your business.',
-  keywords: 'hospitality categories, healthcare supplies, product categories, amenities, linen, safety equipment',
+  description:
+    'Browse our comprehensive range of hospitality and healthcare supplies organized by category. Find everything you need for your business.',
+  keywords:
+    'hospitality categories, healthcare supplies, product categories, amenities, linen, safety equipment',
   openGraph: {
     title: 'Product Categories | Global International',
-    description: 'Browse our comprehensive range of hospitality and healthcare supplies organized by category.',
+    description:
+      'Browse our comprehensive range of hospitality and healthcare supplies organized by category.',
     type: 'website',
   },
 };
@@ -24,11 +27,12 @@ export default async function CategoriesPage() {
             Product Categories
           </h1>
           <p className="text-lg text-[var(--color-text-secondary)] max-w-3xl">
-            Explore our comprehensive range of hospitality and healthcare supplies, 
-            carefully organized to help you find exactly what you need for your business.
+            Explore our comprehensive range of hospitality and healthcare
+            supplies, carefully organized to help you find exactly what you need
+            for your business.
           </p>
         </div>
-        
+
         <CategoryOverview categories={categoryTree} />
       </div>
     </div>

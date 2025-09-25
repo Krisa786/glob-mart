@@ -14,12 +14,15 @@ export async function POST(request: NextRequest) {
 
     // Verify the reset token
     const tokenVerification = await verifyResetToken(token);
-    
+
     if (!tokenVerification.valid) {
-      return NextResponse.json({
-        success: false,
-        message: 'Invalid or expired reset token',
-      }, { status: 400 });
+      return NextResponse.json(
+        {
+          success: false,
+          message: 'Invalid or expired reset token',
+        },
+        { status: 400 }
+      );
     }
 
     return NextResponse.json({
@@ -29,25 +32,30 @@ export async function POST(request: NextRequest) {
         email: tokenVerification.email,
       },
     });
-
   } catch (error) {
     // Log error for debugging
     // console.error('Verify reset token error:', error);
 
     if (error instanceof z.ZodError) {
-      return NextResponse.json({
-        success: false,
-        message: 'Invalid token format',
-        errors: error.issues.map((err: z.ZodIssue) => ({
-          field: err.path.join('.'),
-          message: err.message,
-        })),
-      }, { status: 400 });
+      return NextResponse.json(
+        {
+          success: false,
+          message: 'Invalid token format',
+          errors: error.issues.map((err: z.ZodIssue) => ({
+            field: err.path.join('.'),
+            message: err.message,
+          })),
+        },
+        { status: 400 }
+      );
     }
 
-    return NextResponse.json({
-      success: false,
-      message: 'An error occurred while verifying the reset token',
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        success: false,
+        message: 'An error occurred while verifying the reset token',
+      },
+      { status: 500 }
+    );
   }
 }

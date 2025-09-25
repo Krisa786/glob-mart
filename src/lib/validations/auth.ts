@@ -44,7 +44,14 @@ export const loginSchema = z.object({
 
 // Role validation
 const roleSchema = z
-  .enum(['CUSTOMER', 'ADMIN', 'SALES_MANAGER', 'WAREHOUSE', 'FINANCE', 'SUPPORT'])
+  .enum([
+    'CUSTOMER',
+    'ADMIN',
+    'SALES_MANAGER',
+    'WAREHOUSE',
+    'FINANCE',
+    'SUPPORT',
+  ])
   .default('CUSTOMER');
 
 // Registration form schema

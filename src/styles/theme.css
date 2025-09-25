@@ -150,7 +150,8 @@ html {
   color-scheme: light only;
 }
 
-html, body {
+html,
+body {
   background-color: var(--color-background-primary) !important;
   color: var(--color-text-primary) !important;
 }

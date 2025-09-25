@@ -20,7 +20,8 @@ export interface CategoryBreadcrumb {
   slug: string;
 }
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
 
 // Cache configuration
 const CACHE_TTL = 300; // 5 minutes
@@ -41,8 +42,8 @@ export const getCategoryTree = unstable_cache(
 
       const data = await response.json();
       return data.data || [];
-    } catch (error) {
-      console.error('Error fetching category tree:', error);
+    } catch (_error) {
+      // Error fetching category tree - returning empty array
       return [];
     }
   },
@@ -66,8 +67,8 @@ export const getCategoriesWithProductCounts = unstable_cache(
 
       const data = await response.json();
       return data.data || [];
-    } catch (error) {
-      console.error('Error fetching categories with counts:', error);
+    } catch (_error) {
+      // Error fetching categories with counts - returning empty array
       return [];
     }
   },
@@ -95,7 +96,7 @@ export const getCategoryBySlug = unstable_cache(
       const data = await response.json();
       return data.data;
     } catch (error) {
-      console.error('Error fetching category by slug:', error);
+      // Error fetching category by slug - rethrowing error
       throw error;
     }
   },
@@ -109,9 +110,12 @@ export const getCategoryBySlug = unstable_cache(
 export const getCategoryBreadcrumb = unstable_cache(
   async (categoryId: number): Promise<CategoryBreadcrumb[]> => {
     try {
-      const response = await fetch(`${API_BASE_URL}/categories/${categoryId}/breadcrumb`, {
-        next: { revalidate: CACHE_TTL },
-      });
+      const response = await fetch(
+        `${API_BASE_URL}/categories/${categoryId}/breadcrumb`,
+        {
+          next: { revalidate: CACHE_TTL },
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`Failed to fetch breadcrumb: ${response.status}`);
@@ -119,8 +123,8 @@ export const getCategoryBreadcrumb = unstable_cache(
 
       const data = await response.json();
       return data.data || [];
-    } catch (error) {
-      console.error('Error fetching category breadcrumb:', error);
+    } catch (_error) {
+      // Error fetching category breadcrumb - returning empty array
       return [];
     }
   },
@@ -131,7 +135,10 @@ export const getCategoryBreadcrumb = unstable_cache(
 /**
  * Search categories
  */
-export const searchCategories = async (query: string, limit: number = 10): Promise<Category[]> => {
+export const searchCategories = async (
+  query: string,
+  limit: number = 10
+): Promise<Category[]> => {
   try {
     const response = await fetch(
       `${API_BASE_URL}/categories/search?q=${encodeURIComponent(query)}&limit=${limit}`,
@@ -146,8 +153,8 @@ export const searchCategories = async (query: string, limit: number = 10): Promi
 
     const data = await response.json();
     return data.data || [];
-  } catch (error) {
-    console.error('Error searching categories:', error);
+  } catch (_error) {
+    // Error searching categories - returning empty array
     return [];
   }
 };

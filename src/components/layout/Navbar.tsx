@@ -17,7 +17,7 @@ export interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ className }) => {
   const pathname = usePathname();
   const session = useSession();
-  
+
   // Get navigation items based on user role
   const navigationItems = getNavigationItems(session);
 
@@ -51,9 +51,10 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
             aria-label="Main navigation"
           >
             {navigationItems.map((item) => {
-              const isActive = pathname === item.href || 
+              const isActive =
+                pathname === item.href ||
                 (item.href !== '/' && pathname.startsWith(item.href));
-              
+
               return (
                 <Link
                   key={item.href}
@@ -83,9 +84,8 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
             <ProfileDropdown />
 
             {/* Quote Button - Show for authenticated users or as CTA for guests */}
-            
+
             {session.isAuthenticated ? (
-             
               <Button
                 variant="primary"
                 size="md"
@@ -99,8 +99,7 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
               >
                 QUOTE
               </Button>
-            ) : (            
-              
+            ) : (
               <Button
                 variant="primary"
                 size="md"
@@ -114,7 +113,6 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
               >
                 GET QUOTE
               </Button>
-        
             )}
           </div>
         </div>

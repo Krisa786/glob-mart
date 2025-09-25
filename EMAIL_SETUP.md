@@ -69,6 +69,7 @@ RATE_LIMIT_WINDOW_MS=3600000
 ## Other Email Providers
 
 ### Outlook/Hotmail
+
 ```bash
 SMTP_HOST=smtp-mail.outlook.com
 SMTP_PORT=587
@@ -78,6 +79,7 @@ SMTP_PASS=your-password
 ```
 
 ### Yahoo Mail
+
 ```bash
 SMTP_HOST=smtp.mail.yahoo.com
 SMTP_PORT=587
@@ -89,6 +91,7 @@ SMTP_PASS=your-app-password
 ## Testing the Email Functionality
 
 1. **Start your development server**:
+
    ```bash
    npm run dev
    ```
@@ -124,6 +127,7 @@ SMTP_PASS=your-app-password
 ### Debug Mode
 
 To enable debug logging, add this to your `.env.local`:
+
 ```bash
 DEBUG=nodemailer:*
 ```
@@ -155,6 +159,7 @@ The following API endpoints are available:
 ## Rate Limiting
 
 The system includes built-in rate limiting:
+
 - Default: 5 requests per hour per IP address
 - Configurable via environment variables
 - Returns 429 status with retry information when exceeded

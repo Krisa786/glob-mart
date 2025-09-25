@@ -2,7 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Product, ProductSearchResult, searchProducts } from '@/lib/api/products';
+import {
+  Product,
+  ProductSearchResult,
+  searchProducts,
+} from '@/lib/api/products';
 import { ProductCard } from './ProductCard';
 import { Pagination } from '@/components/ui/Pagination';
 import { SortSelect } from '@/components/ui/SortSelect';
@@ -20,7 +24,10 @@ interface ProductListState {
   error: string | null;
 }
 
-export const ProductList: React.FC<ProductListProps> = ({ categoryId, className }) => {
+export const ProductList: React.FC<ProductListProps> = ({
+  categoryId,
+  className,
+}) => {
   const searchParams = useSearchParams();
   const [state, setState] = useState<ProductListState>({
     products: [],
@@ -33,19 +40,23 @@ export const ProductList: React.FC<ProductListProps> = ({ categoryId, className 
   const page = parseInt(searchParams.get('page') || '1');
   const sort = searchParams.get('sort') || 'newest';
   const q = searchParams.get('q') || '';
-  const minPrice = searchParams.get('minPrice') ? parseFloat(searchParams.get('minPrice')!) : undefined;
-  const maxPrice = searchParams.get('maxPrice') ? parseFloat(searchParams.get('maxPrice')!) : undefined;
+  const minPrice = searchParams.get('minPrice')
+    ? parseFloat(searchParams.get('minPrice')!)
+    : undefined;
+  const maxPrice = searchParams.get('maxPrice')
+    ? parseFloat(searchParams.get('maxPrice')!)
+    : undefined;
   const badge = searchParams.get('badge') || undefined;
 
   // Fetch products when parameters change
   useEffect(() => {
     const fetchProducts = async () => {
-      setState(prev => ({ ...prev, loading: true, error: null }));
-      
+      setState((prev) => ({ ...prev, loading: true, error: null }));
+
       try {
         const params = {
           page,
-          sort: sort as any,
+          sort: sort as 'price' | 'newest' | 'oldest' | 'name' | 'brand',
           limit: 24,
           ...(q && { q }),
           ...(categoryId && { category: categoryId }),
@@ -55,7 +66,7 @@ export const ProductList: React.FC<ProductListProps> = ({ categoryId, className 
         };
 
         const result = await searchProducts(params);
-        
+
         setState({
           products: result.products || [],
           pagination: result.pagination || null,
@@ -63,12 +74,13 @@ export const ProductList: React.FC<ProductListProps> = ({ categoryId, className 
           error: null,
         });
       } catch (error) {
-        console.error('Error fetching products:', error);
+        // Error fetching products - handled by error state
         setState({
           products: [],
           pagination: null,
           loading: false,
-          error: error instanceof Error ? error.message : 'Failed to load products',
+          error:
+            error instanceof Error ? error.message : 'Failed to load products',
         });
       }
     };
@@ -85,11 +97,14 @@ export const ProductList: React.FC<ProductListProps> = ({ categoryId, className 
           <div className="h-8 w-48 bg-[var(--color-background-secondary)] rounded animate-pulse" />
           <div className="h-10 w-32 bg-[var(--color-background-secondary)] rounded animate-pulse" />
         </div>
-        
+
         {/* Product grid skeleton */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {Array.from({ length: 8 }).map((_, index) => (
-            <div key={index} className="bg-[var(--color-background-surface)] rounded-lg border border-[var(--color-border-primary)] overflow-hidden">
+            <div
+              key={index}
+              className="bg-[var(--color-background-surface)] rounded-lg border border-[var(--color-border-primary)] overflow-hidden"
+            >
               <div className="aspect-square bg-[var(--color-background-secondary)] animate-pulse" />
               <div className="p-4 space-y-3">
                 <div className="h-4 bg-[var(--color-background-secondary)] rounded animate-pulse" />
@@ -133,7 +148,7 @@ export const ProductList: React.FC<ProductListProps> = ({ categoryId, className 
           </h2>
           <SortSelect />
         </div>
-        
+
         {/* Empty state */}
         <div className="text-center py-12">
           <div className="text-[var(--color-text-muted)]">
@@ -142,7 +157,9 @@ export const ProductList: React.FC<ProductListProps> = ({ categoryId, className 
             </div>
             <p className="text-lg mb-2">No products found</p>
             <p className="text-sm mb-4">
-              {q ? 'Try adjusting your search terms or filters.' : 'This category doesn\'t have any products yet.'}
+              {q
+                ? 'Try adjusting your search terms or filters.'
+                : "This category doesn't have any products yet."}
             </p>
             {(q || minPrice || maxPrice || badge) && (
               <button
@@ -172,9 +189,15 @@ export const ProductList: React.FC<ProductListProps> = ({ categoryId, className 
           </h2>
           {state.pagination && (
             <p className="text-sm text-[var(--color-text-muted)] mt-1">
-              Showing {((state.pagination.current_page - 1) * state.pagination.per_page) + 1} to{' '}
-              {Math.min(state.pagination.current_page * state.pagination.per_page, state.pagination.total)} of{' '}
-              {state.pagination.total} results
+              Showing{' '}
+              {(state.pagination.current_page - 1) * state.pagination.per_page +
+                1}{' '}
+              to{' '}
+              {Math.min(
+                state.pagination.current_page * state.pagination.per_page,
+                state.pagination.total
+              )}{' '}
+              of {state.pagination.total} results
             </p>
           )}
         </div>

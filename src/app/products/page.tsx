@@ -3,11 +3,14 @@ import { ProductList } from '@/components/products/ProductList';
 
 export const metadata: Metadata = {
   title: 'All Products | Global International',
-  description: 'Browse our complete range of hospitality and healthcare supplies. Premium quality products for hotels, resorts, hospitals, and wellness operators.',
-  keywords: 'hospitality supplies, healthcare products, amenities, linen, safety equipment, hotel supplies, medical supplies',
+  description:
+    'Browse our complete range of hospitality and healthcare supplies. Premium quality products for hotels, resorts, hospitals, and wellness operators.',
+  keywords:
+    'hospitality supplies, healthcare products, amenities, linen, safety equipment, hotel supplies, medical supplies',
   openGraph: {
     title: 'All Products | Global International',
-    description: 'Browse our complete range of hospitality and healthcare supplies.',
+    description:
+      'Browse our complete range of hospitality and healthcare supplies.',
     type: 'website',
   },
   alternates: {
@@ -25,9 +28,9 @@ export default function ProductsPage() {
             All Products
           </h1>
           <p className="text-lg text-[var(--color-text-secondary)] max-w-3xl">
-            Discover our comprehensive range of premium hospitality and healthcare supplies. 
-            From amenities and linens to safety equipment and medical supplies, we have everything 
-            you need for your business.
+            Discover our comprehensive range of premium hospitality and
+            healthcare supplies. From amenities and linens to safety equipment
+            and medical supplies, we have everything you need for your business.
           </p>
         </div>
 

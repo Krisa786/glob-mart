@@ -48,8 +48,7 @@ export default function RegisterPage() {
         const roleName = response.data.user.roles?.[0] || 'Customer';
         setAlert({
           type: 'success',
-          message:
-            `${roleName} account created successfully! Redirecting to your account...`,
+          message: `${roleName} account created successfully! Redirecting to your account...`,
         });
 
         // Redirect to account page
@@ -223,7 +222,10 @@ export default function RegisterPage() {
 
                   {/* Role Selection */}
                   <div>
-                    <label htmlFor="role" className="block text-sm font-medium text-stone-700 mb-2">
+                    <label
+                      htmlFor="role"
+                      className="block text-sm font-medium text-stone-700 mb-2"
+                    >
                       Account Type
                     </label>
                     <select
@@ -232,12 +234,24 @@ export default function RegisterPage() {
                       className="w-full px-3 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                       defaultValue="CUSTOMER"
                     >
-                      <option value="CUSTOMER">Customer - Browse and purchase products</option>
-                      <option value="ADMIN">Administrator - Full system access</option>
-                      <option value="SALES_MANAGER">Sales Manager - Manage quotes and customers</option>
-                      <option value="WAREHOUSE">Warehouse Staff - Manage inventory and orders</option>
-                      <option value="FINANCE">Finance Team - Handle payments and reports</option>
-                      <option value="SUPPORT">Support Team - Customer assistance</option>
+                      <option value="CUSTOMER">
+                        Customer - Browse and purchase products
+                      </option>
+                      <option value="ADMIN">
+                        Administrator - Full system access
+                      </option>
+                      <option value="SALES_MANAGER">
+                        Sales Manager - Manage quotes and customers
+                      </option>
+                      <option value="WAREHOUSE">
+                        Warehouse Staff - Manage inventory and orders
+                      </option>
+                      <option value="FINANCE">
+                        Finance Team - Handle payments and reports
+                      </option>
+                      <option value="SUPPORT">
+                        Support Team - Customer assistance
+                      </option>
                     </select>
                     {form.formState.errors.role && (
                       <p className="mt-1 text-sm text-red-600">
@@ -245,7 +259,8 @@ export default function RegisterPage() {
                       </p>
                     )}
                     <p className="mt-1 text-xs text-stone-500">
-                      Select the account type that best describes your role. Most users should select &quot;Customer&quot;.
+                      Select the account type that best describes your role.
+                      Most users should select &quot;Customer&quot;.
                     </p>
                   </div>
                 </div>
