@@ -47,6 +47,7 @@ export const ProductList: React.FC<ProductListProps> = ({
     ? parseFloat(searchParams.get('maxPrice')!)
     : undefined;
   const badge = searchParams.get('badge') || undefined;
+  const inStock = searchParams.get('inStock') === '1';
 
   // Fetch products when parameters change
   useEffect(() => {
@@ -63,6 +64,7 @@ export const ProductList: React.FC<ProductListProps> = ({
           ...(minPrice && { minPrice }),
           ...(maxPrice && { maxPrice }),
           ...(badge && { badge }),
+          ...(inStock && { inStock: true }),
         };
 
         const result = await searchProducts(params);
@@ -86,7 +88,7 @@ export const ProductList: React.FC<ProductListProps> = ({
     };
 
     fetchProducts();
-  }, [page, sort, q, categoryId, minPrice, maxPrice, badge]);
+  }, [page, sort, q, categoryId, minPrice, maxPrice, badge, inStock]);
 
   // Loading skeleton
   if (state.loading) {
@@ -157,11 +159,11 @@ export const ProductList: React.FC<ProductListProps> = ({
             </div>
             <p className="text-lg mb-2">No products found</p>
             <p className="text-sm mb-4">
-              {q
-                ? 'Try adjusting your search terms or filters.'
+              {q || minPrice || maxPrice || badge || inStock
+                ? 'Try adjusting your search terms or filters to find more products.'
                 : "This category doesn't have any products yet."}
             </p>
-            {(q || minPrice || maxPrice || badge) && (
+            {(q || minPrice || maxPrice || badge || inStock) && (
               <button
                 onClick={() => {
                   const url = new URL(window.location.href);
@@ -224,6 +226,7 @@ export const ProductList: React.FC<ProductListProps> = ({
               ...(minPrice && { minPrice: minPrice.toString() }),
               ...(maxPrice && { maxPrice: maxPrice.toString() }),
               ...(badge && { badge }),
+              ...(inStock && { inStock: '1' }),
             }}
           />
         </div>

@@ -4,3 +4,8 @@ export { Label } from './Label';
 export { Card, CardHeader, CardContent, CardFooter } from './Card';
 export { Alert } from './Alert';
 export { FormField } from './FormField';
+export { Badge } from './Badge';
+export { BadgeChips } from './BadgeChips';
+export { StockPill } from './StockPill';
+export { Pagination } from './Pagination';
+export { SortSelect } from './SortSelect';

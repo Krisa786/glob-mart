@@ -52,6 +52,7 @@ export interface ProductSearchParams {
   minPrice?: number;
   maxPrice?: number;
   badge?: string;
+  inStock?: boolean;
   sort?: 'price' | 'newest' | 'oldest' | 'name' | 'brand';
   page?: number;
   limit?: number;
@@ -93,6 +94,7 @@ export const searchProducts = async (
     if (params.maxPrice)
       searchParams.append('maxPrice', params.maxPrice.toString());
     if (params.badge) searchParams.append('badge', params.badge);
+    if (params.inStock) searchParams.append('inStock', '1');
     if (params.sort) searchParams.append('sort', params.sort);
     if (params.page) searchParams.append('page', params.page.toString());
     if (params.limit) searchParams.append('limit', params.limit.toString());

@@ -3,9 +3,10 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Search } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { ProfileDropdown } from './ProfileDropdown';
+import { HeaderSearch } from '@/components/search/HeaderSearch';
+import { MobileSearchButton } from '@/components/search/MobileSearchButton';
 import { cn } from '@/lib/utils';
 import { useSession } from '@/contexts/SessionContext';
 import { getNavigationItems } from '@/lib/authz';
@@ -73,12 +74,8 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
 
           {/* Search and CTA */}
           <div className="flex items-center space-x-4">
-            <button
-              className="p-2 text-stone-600 hover:text-teal-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 rounded-md"
-              aria-label="Search products"
-            >
-              <Search className="h-5 w-5" />
-            </button>
+            <HeaderSearch className="hidden md:block" />
+            <MobileSearchButton className="md:hidden" />
 
             {/* Profile Dropdown */}
             <ProfileDropdown />

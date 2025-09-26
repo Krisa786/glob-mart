@@ -12,6 +12,8 @@ import {
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
+import { StockPill } from '@/components/ui/StockPill';
+import { BadgeChips } from '@/components/ui/BadgeChips';
 
 interface ProductCardProps {
   product: Product;
@@ -57,29 +59,29 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
         {/* Stock Status Badge */}
         <div className="absolute top-2 left-2">
-          <Badge
-            variant={
+          <StockPill
+            state={
               stockStatus.status === 'in-stock'
-                ? 'success'
+                ? 'in'
                 : stockStatus.status === 'low-stock'
-                  ? 'warning'
-                  : 'error'
+                  ? 'low'
+                  : 'out'
             }
             size="sm"
-          >
-            {stockStatus.text}
-          </Badge>
+          />
         </div>
 
         {/* Sustainability Badges */}
         {product.sustainability_badges &&
           product.sustainability_badges.length > 0 && (
-            <div className="absolute top-2 right-2 flex flex-col gap-1">
-              {product.sustainability_badges.slice(0, 2).map((badge, index) => (
-                <Badge key={index} variant="secondary" size="sm">
-                  {badge}
-                </Badge>
-              ))}
+            <div className="absolute top-2 right-2">
+              <BadgeChips
+                badges={product.sustainability_badges}
+                size="sm"
+                maxVisible={2}
+                showTooltips={false}
+                className="flex-col"
+              />
             </div>
           )}
       </div>

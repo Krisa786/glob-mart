@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import { ProductList } from '@/components/products/ProductList';
+import { ProductsPageWithFilters } from '@/components/products/ProductsPageWithFilters';
 
 export const metadata: Metadata = {
   title: 'All Products | Global International',
@@ -35,7 +36,7 @@ export default function ProductsPage() {
           </p>
         </div>
 
-        {/* Product List */}
+        {/* Products with Filters */}
         <Suspense fallback={
           <div className="space-y-6">
             {/* Header with skeleton */}
@@ -63,7 +64,7 @@ export default function ProductsPage() {
             </div>
           </div>
         }>
-          <ProductList />
+          <ProductsPageWithFilters />
         </Suspense>
       </div>
     </div>
