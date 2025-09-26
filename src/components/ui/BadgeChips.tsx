@@ -9,7 +9,9 @@ import {
   ShieldCheck, 
   CheckCircle,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Zap,
+  Droplets
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { getBadgeToken, getSizeToken, type ComponentSize } from '@/lib/ui/tokens';
@@ -29,6 +31,8 @@ const iconMap = {
   'handshake': Handshake,
   'shield-check': ShieldCheck,
   'check-circle': CheckCircle,
+  'zap': Zap,
+  'droplets': Droplets,
 } as const;
 
 interface TooltipProps {
@@ -97,7 +101,7 @@ export const BadgeChips: React.FC<BadgeChipsProps> = ({
     <div className={cn('flex flex-wrap items-center', sizeToken.gap, className)}>
       {visibleBadges.map((badge, index) => {
         const badgeToken = getBadgeToken(badge);
-        const IconComponent = iconMap[badgeToken.icon];
+        const IconComponent = iconMap[badgeToken.icon] || CheckCircle; // Fallback to CheckCircle if icon not found
         const isHovered = hoveredBadge === badge;
 
         const chip = (
